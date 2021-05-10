@@ -4,6 +4,8 @@ This framework is used to analyse commodity futures factors, including correlati
 
 ## documentation
 
+Besides visiting the following website directly, you can also refer to the **tutorial** folder directly.
+
 **grasping data**:\
     [commodity_pool_data](https://github.com/algo21-219040029/Assignment3/blob/master/tutorial/%E6%95%B0%E6%8D%AE%E8%8E%B7%E5%8F%96/%E5%95%86%E5%93%81%E6%B1%A0%E6%95%B0%E6%8D%AE.ipynb)\
     [factor_data](https://github.com/algo21-219040029/Assignment3/blob/master/tutorial/%E6%95%B0%E6%8D%AE%E8%8E%B7%E5%8F%96/%E5%9B%A0%E5%AD%90%E6%95%B0%E6%8D%AE.ipynb)\
@@ -32,7 +34,7 @@ This framework is used to analyse commodity futures factors, including correlati
 The following is the API reference documentation. You can refer to it:\
 **/docs/build/html/index.rst**,\
 in which you can see:
-![image.png](attachment:image.png)
+![image.png](image.png)
 
 
 ```python
