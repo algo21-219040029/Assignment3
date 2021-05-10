@@ -1,0 +1,237 @@
+
+<!DOCTYPE html>
+
+<html lang="zh_cn">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
+    <title>display package &#8212; Commodity Futures Factor Backtesting Framework 1.0 文档</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/translations.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="display-package">
+<h1>display package<a class="headerlink" href="#display-package" title="永久链接至标题">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="永久链接至标题">¶</a></h2>
+</section>
+<section id="module-display.base">
+<span id="display-base-module"></span><h2>display.base module<a class="headerlink" href="#module-display.base" title="永久链接至标题">¶</a></h2>
+<dl class="py class">
+<dt id="display.base.Display">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">display.base.</span></code><code class="sig-name descname"><span class="pre">Display</span></code><a class="headerlink" href="#display.base.Display" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt id="display.base.Display.add_backtest_result">
+<code class="sig-name descname"><span class="pre">add_backtest_result</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">info_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">curve</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_metrics</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">industry_metrics</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symbol_metrics</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cum_profit_series</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#display.base.Display.add_backtest_result" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="display.base.Display.display_backtest_result">
+<code class="sig-name descname"><span class="pre">display_backtest_result</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">info_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_folder_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">doc_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#display.base.Display.display_backtest_result" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="display.base.Display.get_backtest_result">
+<code class="sig-name descname"><span class="pre">get_backtest_result</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">info_dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#display.base.Display.get_backtest_result" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="display.base.Display.load_setting">
+<code class="sig-name descname"><span class="pre">load_setting</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#display.base.Display.load_setting" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="display.base.Display.load_single_backtest_result">
+<code class="sig-name descname"><span class="pre">load_single_backtest_result</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">factor_group</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">factor_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">factor_params</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">commodity_pool_group</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">commodity_pool_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">commodity_pool_params</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signal_group</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signal_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signal_params</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight_group</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight_params</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backtest_params</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#display.base.Display.load_single_backtest_result" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-display.search">
+<span id="display-search-module"></span><h2>display.search module<a class="headerlink" href="#module-display.search" title="永久链接至标题">¶</a></h2>
+<dl class="py class">
+<dt id="display.search.Search">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">display.search.</span></code><code class="sig-name descname"><span class="pre">Search</span></code><a class="headerlink" href="#display.search.Search" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt id="display.search.Search.get_all_factor_info">
+<code class="sig-name descname"><span class="pre">get_all_factor_info</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#display.search.Search.get_all_factor_info" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="display.search.Search.get_info">
+<code class="sig-name descname"><span class="pre">get_info</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">factor_group</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">factor_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#display.search.Search.get_info" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="display.search.Search.init_setting">
+<code class="sig-name descname"><span class="pre">init_setting</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#display.search.Search.init_setting" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-display.word_template">
+<span id="display-word-template-module"></span><h2>display.word_template module<a class="headerlink" href="#module-display.word_template" title="永久链接至标题">¶</a></h2>
+<dl class="py class">
+<dt id="display.word_template.BacktestDocument">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">display.word_template.</span></code><code class="sig-name descname"><span class="pre">BacktestDocument</span></code><a class="headerlink" href="#display.word_template.BacktestDocument" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt id="display.word_template.BacktestDocument.add_backtest_result">
+<code class="sig-name descname"><span class="pre">add_backtest_result</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">info_dict</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">curve</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_metrics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">industry_metrics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symbol_metrics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cum_profit_series</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#display.word_template.BacktestDocument.add_backtest_result" title="永久链接至目标">¶</a></dt>
+<dd><p>添加回测结果信息，包括参数字典, 曲线路径, all_metrics, industry_metrics, symbol_metrics, cum_profit_series</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>info_dict</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – 参数字典</p></li>
+<li><p><strong>curve</strong> (<em>str</em>) – 曲线图片文件路径</p></li>
+<li><p><strong>all_metrics</strong> (<em>DataFramne</em>) – 回测整体的指标</p></li>
+<li><p><strong>industry_metrics</strong> (<em>DataFrame</em>) – 按行业分的指标</p></li>
+<li><p><strong>symbol_metrics</strong> (<em>DataFrame</em>) – 按品种分的指标</p></li>
+<li><p><strong>cum_profit_series</strong> (<em>DataFrame</em>) – 累计收益序列，第一列为时间，第二列为累计收益</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="display.word_template.BacktestDocument.display_backtest_result">
+<code class="sig-name descname"><span class="pre">display_backtest_result</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">info_list</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_folder_path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">doc_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#display.word_template.BacktestDocument.display_backtest_result" title="永久链接至目标">¶</a></dt>
+<dd><p>输出回测结果，生成word文档</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>info_list</strong> (<em>str</em><em>,</em>) – 多组参数列表</p></li>
+<li><p><strong>output_folder_path</strong> (<em>str</em>) – 输出文件夹路径</p></li>
+<li><p><strong>doc_name</strong> (<em>str</em>) – 输出文件名称</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="display.word_template.BacktestDocument.get_file_name">
+<code class="sig-name descname"><span class="pre">get_file_name</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">str</span><a class="headerlink" href="#display.word_template.BacktestDocument.get_file_name" title="永久链接至目标">¶</a></dt>
+<dd><p>根据参数生成文件名，即将字典展开成 key1_value1 key2_value2 key3_value3 …</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><p><strong>params</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – 参数字典</p>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p><strong>string</strong> – 文件名 key1_value1 key2_value2 key3_value3 …</p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-display">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-display" title="永久链接至标题">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Commodity Futures Factor Backtesting Framework</a></h1>
+
+
+
+
+
+
+
+
+<h3>导航</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">快速搜索</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="转向" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Luo Feng.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/display.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

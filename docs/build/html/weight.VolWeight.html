@@ -1,0 +1,148 @@
+
+<!DOCTYPE html>
+
+<html lang="zh_cn">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
+    <title>weight.VolWeight package &#8212; Commodity Futures Factor Backtesting Framework 1.0 文档</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/translations.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="weight-volweight-package">
+<h1>weight.VolWeight package<a class="headerlink" href="#weight-volweight-package" title="永久链接至标题">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="永久链接至标题">¶</a></h2>
+</section>
+<section id="module-weight.VolWeight.base">
+<span id="weight-volweight-base-module"></span><h2>weight.VolWeight.base module<a class="headerlink" href="#module-weight.VolWeight.base" title="永久链接至标题">¶</a></h2>
+<dl class="py class">
+<dt id="weight.VolWeight.base.BaseVolWeight">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">weight.VolWeight.base.</span></code><code class="sig-name descname"><span class="pre">BaseVolWeight</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">contract</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'main'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">price</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'close'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rebalance_num</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weight.VolWeight.base.BaseVolWeight" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="weight.html#weight.base.BaseWeight" title="weight.base.BaseWeight"><code class="xref py py-class docutils literal notranslate"><span class="pre">weight.base.BaseWeight</span></code></a></p>
+<p>波动率相关权重生成器</p>
+<dl class="py method">
+<dt id="weight.VolWeight.base.BaseVolWeight.get_rolling_std">
+<code class="sig-name descname"><span class="pre">get_rolling_std</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">window</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="headerlink" href="#weight.VolWeight.base.BaseVolWeight.get_rolling_std" title="永久链接至目标">¶</a></dt>
+<dd><blockquote>
+<div><p>获取滚动N日的标准差</p>
+<dl class="simple">
+<dt>window: int</dt><dd><p>时间窗口</p>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="simple">
+<dt>`   std_df: DataFrame</dt><dd><p>window日滚动标准差</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="weight.VolWeight.base.BaseVolWeight.get_weight">
+<code class="sig-name descname"><span class="pre">get_weight</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="headerlink" href="#weight.VolWeight.base.BaseVolWeight.get_weight" title="永久链接至目标">¶</a></dt>
+<dd><p>获取权重DataFrame</p>
+<dl class="field-list simple">
+<dt class="field-odd">返回</dt>
+<dd class="field-odd"><p><strong>weight_df</strong> – 权重DataFrame</p>
+</dd>
+<dt class="field-even">返回类型</dt>
+<dd class="field-even"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-weight.VolWeight">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-weight.VolWeight" title="永久链接至标题">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Commodity Futures Factor Backtesting Framework</a></h1>
+
+
+
+
+
+
+
+
+<h3>导航</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">快速搜索</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="转向" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Luo Feng.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/weight.VolWeight.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

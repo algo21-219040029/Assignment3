@@ -1,0 +1,181 @@
+
+<!DOCTYPE html>
+
+<html lang="zh_cn">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
+    <title>continuous_contract package &#8212; Commodity Futures Factor Backtesting Framework 1.0 文档</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/translations.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="continuous-contract-package">
+<h1>continuous_contract package<a class="headerlink" href="#continuous-contract-package" title="永久链接至标题">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="永久链接至标题">¶</a></h2>
+</section>
+<section id="module-continuous_contract.ContinuousMainContract">
+<span id="continuous-contract-continuousmaincontract-module"></span><h2>continuous_contract.ContinuousMainContract module<a class="headerlink" href="#module-continuous_contract.ContinuousMainContract" title="永久链接至标题">¶</a></h2>
+<dl class="py class">
+<dt id="continuous_contract.ContinuousMainContract.ContinuousMainContract">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">continuous_contract.ContinuousMainContract.</span></code><code class="sig-name descname"><span class="pre">ContinuousMainContract</span></code><a class="headerlink" href="#continuous_contract.ContinuousMainContract.ContinuousMainContract" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>生成主力连续合约数据的代码</p>
+<dl class="py method">
+<dt id="continuous_contract.ContinuousMainContract.ContinuousMainContract.get_continuous_main_contract_series">
+<code class="sig-name descname"><span class="pre">get_continuous_main_contract_series</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbol</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rebalance_date_num</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="headerlink" href="#continuous_contract.ContinuousMainContract.ContinuousMainContract.get_continuous_main_contract_series" title="永久链接至目标">¶</a></dt>
+<dd><p>获取主力连续合约收益序列
+:param symbol: 品种代码
+:param rebalance_date_num: 换仓日期
+:return:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="continuous_contract.ContinuousMainContract.ContinuousMainContract.get_field">
+<code class="sig-name descname"><span class="pre">get_field</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbol</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="headerlink" href="#continuous_contract.ContinuousMainContract.ContinuousMainContract.get_field" title="永久链接至目标">¶</a></dt>
+<dd><p>获取收盘价DataFrame
+:param symbol: 品种代码
+:return: 单品种不同合约的收盘价</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="continuous_contract.ContinuousMainContract.ContinuousMainContract.get_main_contract_df">
+<code class="sig-name descname"><span class="pre">get_main_contract_df</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbol</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rebalance_date_num</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="headerlink" href="#continuous_contract.ContinuousMainContract.ContinuousMainContract.get_main_contract_df" title="永久链接至目标">¶</a></dt>
+<dd><p>生成主力合约代码列表
+:param symbol: 品种代码
+:param rebalance_date_num: 几日换仓
+:return: 主力连续合约数据，具体见上面</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="continuous_contract.ContinuousMainContract.ContinuousMainContract.get_maturity_date">
+<code class="sig-name descname"><span class="pre">get_maturity_date</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbol</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="headerlink" href="#continuous_contract.ContinuousMainContract.ContinuousMainContract.get_maturity_date" title="永久链接至目标">¶</a></dt>
+<dd><p>获取单一品种每个合约的到期日信息，包括到期日、到期月上一个月的最后一个交易日、到期日上一个月的倒数第三个的交易日和倒数第五个交易日
+:param symbol: 品种代码
+:return:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="continuous_contract.ContinuousMainContract.ContinuousMainContract.get_open_interest">
+<code class="sig-name descname"><span class="pre">get_open_interest</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbol</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="headerlink" href="#continuous_contract.ContinuousMainContract.ContinuousMainContract.get_open_interest" title="永久链接至目标">¶</a></dt>
+<dd><p>获取每日持仓量数据
+:param symbol: 品种代码
+:return: 持仓量数据DataFrame</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="continuous_contract.ContinuousMainContract.ContinuousMainContract.get_symbol_list">
+<code class="sig-name descname"><span class="pre">get_symbol_list</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#continuous_contract.ContinuousMainContract.ContinuousMainContract.get_symbol_list" title="永久链接至目标">¶</a></dt>
+<dd><p>获取品种列表</p>
+<dl class="field-list simple">
+<dt class="field-odd">返回</dt>
+<dd class="field-odd"><p><strong>symbol_List</strong> – 期货品种列表</p>
+</dd>
+<dt class="field-even">返回类型</dt>
+<dd class="field-even"><p>List[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="continuous_contract.ContinuousMainContract.ContinuousMainContract.init_basics_data">
+<code class="sig-name descname"><span class="pre">init_basics_data</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#continuous_contract.ContinuousMainContract.ContinuousMainContract.init_basics_data" title="永久链接至目标">¶</a></dt>
+<dd><p>初始化基础数据：包括交易日历和all_instruments
+:return: None</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-continuous_contract">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-continuous_contract" title="永久链接至标题">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Commodity Futures Factor Backtesting Framework</a></h1>
+
+
+
+
+
+
+
+
+<h3>导航</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">快速搜索</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="转向" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Luo Feng.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/continuous_contract.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

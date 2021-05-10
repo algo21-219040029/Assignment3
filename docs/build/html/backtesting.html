@@ -1,0 +1,1002 @@
+
+<!DOCTYPE html>
+
+<html lang="zh_cn">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
+    <title>backtesting package &#8212; Commodity Futures Factor Backtesting Framework 1.0 文档</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/translations.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="backtesting-package">
+<h1>backtesting package<a class="headerlink" href="#backtesting-package" title="永久链接至标题">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="永久链接至标题">¶</a></h2>
+</section>
+<section id="module-backtesting.backtest_utility">
+<span id="backtesting-backtest-utility-module"></span><h2>backtesting.backtest_utility module<a class="headerlink" href="#module-backtesting.backtest_utility" title="永久链接至标题">¶</a></h2>
+<dl class="py function">
+<dt id="backtesting.backtest_utility.execute_backtesting">
+<code class="sig-prename descclassname"><span class="pre">backtesting.backtest_utility.</span></code><code class="sig-name descname"><span class="pre">execute_backtesting</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">weight_df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">price_df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init_total_value</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hold_datetime_list</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">datetime.datetime</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rate</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interest</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'simple'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'cross_section'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tqdm_flag</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">pandas.core.frame.DataFrame</span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#backtesting.backtest_utility.execute_backtesting" title="永久链接至目标">¶</a></dt>
+<dd><p>回测执行</p>
+<p>通过输入每日持仓权重、每日收盘价、初始资金量、换仓日期列表、交易费用执行回测</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>weight_df</strong> (<em>DataFrame</em>) – 每日持仓权重</p></li>
+<li><p><strong>price_df</strong> (<em>DataFrame</em>) – 每日价格</p></li>
+<li><p><strong>init_total_value</strong> (<em>int</em>) – 初始持仓金额</p></li>
+<li><p><strong>hold_datetime_list</strong> (<em>List</em><em>[</em><em>datetime</em><em>]</em>) – 换仓日期列表</p></li>
+<li><p><strong>rate</strong> (<em>float</em>) – 交易费用</p></li>
+<li><p><strong>interest</strong> (<em>str</em><em>, </em><em>default simple</em>) – 单利还是复利执行, simple or compound</p></li>
+<li><p><strong>type</strong> (<em>str</em><em>, </em><em>default cross_section</em>) – 横截面还是时间序列</p></li>
+<li><p><strong>tqdm_flag</strong> (<em>bool</em><em>, </em><em>default True</em>) – 是否使用tqdm</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p><strong>result</strong> – 回测结果信息</p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>Dict[str, DataFrame]</p>
+</dd>
+</dl>
+<p class="rubric">提示</p>
+<p>对于不是定期调仓、月末调仓、月初调仓等不规则调仓，可以自行构造hold_datetime_list执行回测</p>
+<div class="admonition seealso">
+<p class="admonition-title">参见</p>
+<p><a class="reference internal" href="#backtesting.monthly_backtesting.LongShortMonthlyBacktesting" title="backtesting.monthly_backtesting.LongShortMonthlyBacktesting"><code class="xref py py-obj docutils literal notranslate"><span class="pre">backtesting.monthly_backtesting.LongShortMonthlyBacktesting</span></code></a>, <a class="reference internal" href="#backtesting.period_backtesting.LongShortPeriodBacktesting" title="backtesting.period_backtesting.LongShortPeriodBacktesting"><code class="xref py py-obj docutils literal notranslate"><span class="pre">backtesting.period_backtesting.LongShortPeriodBacktesting</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="backtesting.backtest_utility.get_hold_profit_df">
+<code class="sig-prename descclassname"><span class="pre">backtesting.backtest_utility.</span></code><code class="sig-name descname"><span class="pre">get_hold_profit_df</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pos_df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">price_df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hold_datetime_list</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">datetime.datetime</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="headerlink" href="#backtesting.backtest_utility.get_hold_profit_df" title="永久链接至目标">¶</a></dt>
+<dd><p>根据每日持仓、每日收盘价和换仓日期列表获取每次持仓的收益（时间戳为持仓开始日期）</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pos_df</strong> (<em>DataFrame</em>) – 每日持仓，index为交易日期，columns为品种代码，data为每日持仓（对应开盘调整后的持仓）</p></li>
+<li><p><strong>price_df</strong> (<em>DataFrame</em>) – 每日价格，index为交易日期，columns为品种代码，data为价格</p></li>
+<li><p><strong>hold_datetime_list</strong> (<em>List</em><em>[</em><em>datetime</em><em>]</em>) – 换仓日期列表</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p><strong>hold_profit_df</strong> – 每次持仓数据</p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="backtesting.backtest_utility.rolling_backtest_result_analysis">
+<code class="sig-prename descclassname"><span class="pre">backtesting.backtest_utility.</span></code><code class="sig-name descname"><span class="pre">rolling_backtest_result_analysis</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rolling_result</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#backtesting.backtest_utility.rolling_backtest_result_analysis" title="永久链接至目标">¶</a></dt>
+<dd><p>生成起始日平滑回测结果</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><p><strong>rolling_result</strong> (<em>Dict</em><em>[</em><em>int</em><em>, </em><em>Any</em><em>]</em>) – 每次起始日定期调仓的回测结果, key为起始日shift, value为回测结果</p>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p><strong>result</strong> – 起始日平滑回测结果，包括三个键值对：
+1.symbol: 每个品种的指标
+2.industry: 分行业的指标
+3.all: 总体的指标</p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>Dict[str, Union[Series, DataFrame]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-backtesting.base">
+<span id="backtesting-base-module"></span><h2>backtesting.base module<a class="headerlink" href="#module-backtesting.base" title="永久链接至标题">¶</a></h2>
+<dl class="py class">
+<dt id="backtesting.base.BaseBacktesting">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">backtesting.base.</span></code><code class="sig-name descname"><span class="pre">BaseBacktesting</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#backtesting.base.BaseBacktesting" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="bases.html#bases.base.BaseClass" title="bases.base.BaseClass"><code class="xref py py-class docutils literal notranslate"><span class="pre">bases.base.BaseClass</span></code></a></p>
+<p>回测系统的基类</p>
+<p>每一个回测系统均需要继承自BaseBacktesting，需要实现run_backtesting</p>
+<dl class="py attribute">
+<dt id="backtesting.base.BaseBacktesting.weights">
+<code class="sig-name descname"><span class="pre">weights</span></code><a class="headerlink" href="#backtesting.base.BaseBacktesting.weights" title="永久链接至目标">¶</a></dt>
+<dd><p>权重DataFrame, index为交易时间, columns为品种代码, data为权重, 做多为正, 做空为负, 空仓为0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="backtesting.base.BaseBacktesting.all_instruments">
+<code class="sig-name descname"><span class="pre">all_instruments</span></code><a class="headerlink" href="#backtesting.base.BaseBacktesting.all_instruments" title="永久链接至目标">¶</a></dt>
+<dd><p>所有期货合约基础信息</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="backtesting.base.BaseBacktesting.symbol_industry_map">
+<code class="sig-name descname"><span class="pre">symbol_industry_map</span></code><a class="headerlink" href="#backtesting.base.BaseBacktesting.symbol_industry_map" title="永久链接至目标">¶</a></dt>
+<dd><p>各期货品种和行业对应表, 两列数据, 第一列为品种代码, 第二列为行业</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="backtesting.base.BaseBacktesting.basics_data_manager">
+<code class="sig-name descname"><span class="pre">basics_data_manager</span></code><a class="headerlink" href="#backtesting.base.BaseBacktesting.basics_data_manager" title="永久链接至目标">¶</a></dt>
+<dd><p>基础数据管理器</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="data_manager.html#data_manager.BasicsDataManager.BasicsDataManager" title="data_manager.BasicsDataManager.BasicsDataManager">BasicsDataManager</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="backtesting.base.BaseBacktesting.factor_data_manager">
+<code class="sig-name descname"><span class="pre">factor_data_manager</span></code><a class="headerlink" href="#backtesting.base.BaseBacktesting.factor_data_manager" title="永久链接至目标">¶</a></dt>
+<dd><p>因子管理器</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="data_manager.html#data_manager.FactorDataManager.FactorDataManager" title="data_manager.FactorDataManager.FactorDataManager">FactorDataManager</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="backtesting.base.BaseBacktesting.commodity_pool_manager">
+<code class="sig-name descname"><span class="pre">commodity_pool_manager</span></code><a class="headerlink" href="#backtesting.base.BaseBacktesting.commodity_pool_manager" title="永久链接至目标">¶</a></dt>
+<dd><p>商品池管理器</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="data_manager.html#data_manager.CommodityPoolManager.CommodityPoolManager" title="data_manager.CommodityPoolManager.CommodityPoolManager">CommodityPoolManager</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="backtesting.base.BaseBacktesting.continuous_contract_data_manager">
+<code class="sig-name descname"><span class="pre">continuous_contract_data_manager</span></code><a class="headerlink" href="#backtesting.base.BaseBacktesting.continuous_contract_data_manager" title="永久链接至目标">¶</a></dt>
+<dd><p>连续合约数据管理器</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="data_manager.html#data_manager.ContinuousContractDataManager.ContinuousContractDataManager" title="data_manager.ContinuousContractDataManager.ContinuousContractDataManager">ContinuousContractDataManager</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="backtesting.base.BaseBacktesting.backtest_result_path">
+<code class="sig-name descname"><span class="pre">backtest_result_path</span></code><a class="headerlink" href="#backtesting.base.BaseBacktesting.backtest_result_path" title="永久链接至目标">¶</a></dt>
+<dd><p>回测结果路径</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>pathlib.Path</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="backtesting.base.BaseBacktesting.get_continuous_field">
+<code class="sig-name descname"><span class="pre">get_continuous_field</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">contract</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">price</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'close'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rebalance_num</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'continuous_price'</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="headerlink" href="#backtesting.base.BaseBacktesting.get_continuous_field" title="永久链接至目标">¶</a></dt>
+<dd><p>获取连续合约指定字段的数据</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>contract</strong> (<em>str</em>) – 合约种类，目前可选有main和active_near, main表示主力合约, active_near表示活跃近月</p></li>
+<li><p><strong>price</strong> (<em>str</em>) – 连续合约价格, close or settlement</p></li>
+<li><p><strong>rebalance_num</strong> (<em>int</em><em>, </em><em>default = 1</em>) – 换仓天数, 可选天数1,3,5</p></li>
+<li><p><strong>field</strong> (<em>str</em><em>, </em><em>default = 'continuous_price'</em>) – 字典，continuous_price</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p><strong>df</strong> – 连续合约field字段数据, 一般是开盘价或收盘价</p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="backtesting.base.BaseBacktesting.get_file_name">
+<code class="sig-name descname"><span class="pre">get_file_name</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">str</span><a class="headerlink" href="#backtesting.base.BaseBacktesting.get_file_name" title="永久链接至目标">¶</a></dt>
+<dd><p>将参数字典转化为 参数1_参数1值 参数2_参数2值…的形式</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><p><strong>params</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – 参数字典</p>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p><strong>string</strong> – 转化后的字符串参数形式</p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="backtesting.base.BaseBacktesting.get_industry">
+<code class="sig-name descname"><span class="pre">get_industry</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#backtesting.base.BaseBacktesting.get_industry" title="永久链接至目标">¶</a></dt>
+<dd><p>获取行业</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>group</strong> (<em>str</em>) – 行业组名</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – 行业名称</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p><strong>industry_symbol_map</strong> – 行业品种映射表</p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>Dict[str, List[str]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="backtesting.base.BaseBacktesting.get_info">
+<code class="sig-name descname"><span class="pre">get_info</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#backtesting.base.BaseBacktesting.get_info" title="永久链接至目标">¶</a></dt>
+<dd><p>整理回测信息，生成回测信息字典，包括因子信息, 商品池信息, 信号信息, 权重信息和回测信息</p>
+<dl class="field-list simple">
+<dt class="field-odd">返回</dt>
+<dd class="field-odd"><p><strong>info_dict</strong> – 回测信息</p>
+</dd>
+<dt class="field-even">返回类型</dt>
+<dd class="field-even"><p>Dict[str, Any]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="backtesting.base.BaseBacktesting.get_metrics">
+<code class="sig-name descname"><span class="pre">get_metrics</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span> </span><span class="pre">Any</span><span class="p"><span class="pre">,</span> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#backtesting.base.BaseBacktesting.get_metrics" title="永久链接至目标">¶</a></dt>
+<dd><p>获取回测指标</p>
+<dl class="field-list simple">
+<dt class="field-odd">返回</dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><strong>all_metrics</strong> (<em>pandas.Series</em>) – 总体指标</p></li>
+<li><p><strong>industry_metrics</strong> (<em>pandas.DataFrame</em>) – 行业指标</p></li>
+<li><p><strong>symbol_metrics</strong> (<em>pandas.DataFrame</em>) – 品种指标</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="backtesting.base.BaseBacktesting.get_string">
+<code class="sig-name descname"><span class="pre">get_string</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">str</span><a class="headerlink" href="#backtesting.base.BaseBacktesting.get_string" title="永久链接至目标">¶</a></dt>
+<dd><p>获取回测信息</p>
+<dl class="field-list simple">
+<dt class="field-odd">返回</dt>
+<dd class="field-odd"><p><strong>string</strong> – 回测信息</p>
+</dd>
+<dt class="field-even">返回类型</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="backtesting.base.BaseBacktesting.import_component_class">
+<code class="sig-name descname"><span class="pre">import_component_class</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">component</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Any</span><a class="headerlink" href="#backtesting.base.BaseBacktesting.import_component_class" title="永久链接至目标">¶</a></dt>
+<dd><p>根据component类别, group和name导入类(信号类和权重类)</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>component</strong> (<em>str</em>) – 回测的部件, signals or weight</p></li>
+<li><p><strong>group</strong> (<em>str</em>) – 所属类别</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – 名称</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p><strong>component_class</strong> – 部件类，一般是信号类或权重类</p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>Any</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="backtesting.base.BaseBacktesting.init_basics_data">
+<code class="sig-name descname"><span class="pre">init_basics_data</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#backtesting.base.BaseBacktesting.init_basics_data" title="永久链接至目标">¶</a></dt>
+<dd><p>初始化基础数据</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="backtesting.base.BaseBacktesting.load_setting">
+<code class="sig-name descname"><span class="pre">load_setting</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#backtesting.base.BaseBacktesting.load_setting" title="永久链接至目标">¶</a></dt>
+<dd><p>加载回测信息</p>
+<dl class="field-list simple">
+<dt class="field-odd">返回</dt>
+<dd class="field-odd"><p><strong>settings</strong> – 回测信息</p>
+</dd>
+<dt class="field-even">返回类型</dt>
+<dd class="field-even"><p>Dict[str, Any]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="backtesting.base.BaseBacktesting.output_backtest_result">
+<code class="sig-name descname"><span class="pre">output_backtest_result</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#backtesting.base.BaseBacktesting.output_backtest_result" title="永久链接至目标">¶</a></dt>
+<dd><p>输出回测结果</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>overwrite</strong> (<em>bool</em><em>, </em><em>default True</em>) – 是否覆盖已有的回测结果</p></li>
+<li><p><strong>output_path</strong> (<em>str</em><em>, </em><em>default None</em>) – 输出路径，指输出的其他路径</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="backtesting.base.BaseBacktesting.plot11">
+<code class="sig-name descname"><span class="pre">plot11</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#backtesting.base.BaseBacktesting.plot11" title="永久链接至目标">¶</a></dt>
+<dd><p>画图函数: 画出总体的多空、多头、空头资金曲线</p>
+<dl class="field-list simple">
+<dt class="field-odd">返回</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">返回类型</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="backtesting.base.BaseBacktesting.plot12">
+<code class="sig-name descname"><span class="pre">plot12</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'long_short'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#backtesting.base.BaseBacktesting.plot12" title="永久链接至目标">¶</a></dt>
+<dd><p>画图函数：画出多空(或做多, 多空)的总体和分行业的曲线</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><p><strong>type</strong> (<em>str</em><em>, </em><em>default long_short</em>) – 输出的曲线的类型, 多空, 做多or做空
+long_short, long, short</p>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="backtesting.base.BaseBacktesting.plot21">
+<code class="sig-name descname"><span class="pre">plot21</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">industry</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#backtesting.base.BaseBacktesting.plot21" title="永久链接至目标">¶</a></dt>
+<dd><p>获取某行业及该行业的品种的资金曲线</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>industry</strong> (<em>str</em><em>,</em>) – 行业</p></li>
+<li><p><strong>output_path</strong> (<em>str</em>) – 输出路径</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="backtesting.base.BaseBacktesting.plot22">
+<code class="sig-name descname"><span class="pre">plot22</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">industry</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'long_short'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#backtesting.base.BaseBacktesting.plot22" title="永久链接至目标">¶</a></dt>
+<dd><p>获取某行业及该行业的品种的资金曲线</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>industry</strong> (<em>str</em><em>,</em>) – 行业</p></li>
+<li><p><strong>type</strong> (<em>str</em><em>, </em><em>default long_short</em>) – 多空, 做多, 做空 long_short, long, short</p></li>
+<li><p><strong>output_path</strong> (<em>str</em>) – 输出路径</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="backtesting.base.BaseBacktesting.prepare_weights">
+<code class="sig-name descname"><span class="pre">prepare_weights</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#backtesting.base.BaseBacktesting.prepare_weights" title="永久链接至目标">¶</a></dt>
+<dd><p>回测准备工作，生成回测所需要的权重</p>
+<dl class="field-list simple">
+<dt class="field-odd">返回</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">返回类型</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="backtesting.base.BaseBacktesting.run_backtesting">
+<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">run_backtesting</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#backtesting.base.BaseBacktesting.run_backtesting" title="永久链接至目标">¶</a></dt>
+<dd><p>执行回测，每个回测类需要具体实现的地方</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="backtesting.base.BaseBacktesting.save_setting">
+<code class="sig-name descname"><span class="pre">save_setting</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">settings</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#backtesting.base.BaseBacktesting.save_setting" title="永久链接至目标">¶</a></dt>
+<dd><p>保存回测信息</p>
+<p>参数字典字符串: backtest_id</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><p><strong>settings</strong> (<em>参数字典</em>) – </p>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="backtesting.base.BaseBacktesting.set_commodity_pool">
+<code class="sig-name descname"><span class="pre">set_commodity_pool</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#backtesting.base.BaseBacktesting.set_commodity_pool" title="永久链接至目标">¶</a></dt>
+<dd><p>根据group, name, str设置商品池</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>group</strong> (<em>str</em>) – 商品池类别</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – 商品池名称</p></li>
+<li><p><strong>params</strong> (<em>商品池参数</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="backtesting.base.BaseBacktesting.set_factor">
+<code class="sig-name descname"><span class="pre">set_factor</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#backtesting.base.BaseBacktesting.set_factor" title="永久链接至目标">¶</a></dt>
+<dd><p>设置因子</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>group</strong> (<em>str</em>) – 因子类别</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – 因子名称</p></li>
+<li><p><strong>params</strong> (<em>str</em>) – 因子参数</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="backtesting.base.BaseBacktesting.set_signal">
+<code class="sig-name descname"><span class="pre">set_signal</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#backtesting.base.BaseBacktesting.set_signal" title="永久链接至目标">¶</a></dt>
+<dd><p>设置信号</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>group</strong> (<em>str</em>) – 信号类别</p></li>
+<li><p><strong>params</strong> – 信号参数</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="backtesting.base.BaseBacktesting.set_weight">
+<code class="sig-name descname"><span class="pre">set_weight</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#backtesting.base.BaseBacktesting.set_weight" title="永久链接至目标">¶</a></dt>
+<dd><p>设置权重</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>group</strong> (<em>str</em>) – 权重类别</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – 权重名称</p></li>
+<li><p><strong>params</strong> (<em>str</em>) – 权重参数</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="backtesting.base.BaseBacktesting.set_weight_df">
+<code class="sig-name descname"><span class="pre">set_weight_df</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">weight_df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#backtesting.base.BaseBacktesting.set_weight_df" title="永久链接至目标">¶</a></dt>
+<dd><p>导入权重DataFrame</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><p><strong>weight_df</strong> (<em>DataFrame</em>) – 权重DataFrame</p>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-backtesting.display">
+<span id="backtesting-display-module"></span><h2>backtesting.display module<a class="headerlink" href="#module-backtesting.display" title="永久链接至标题">¶</a></h2>
+<p>1.画热力图，不同quantile和frequency下portfolio的年化收益、总收益、换手率、最大回撤、夏普比率
+2.whole: portfolio和行业汇总。然后是各个行业内部
+3.相关指标： long_rate, short_rate, win_rate, long_win_rate, short_win_rate, participate_rate,</p>
+<blockquote>
+<div><p>gain_loss_rate, long_gain_loss_rate, short_gain_loss_rate,
+max_drawdown, turnover_rate, sharpe, total_return, annual_return</p>
+</div></blockquote>
+</section>
+<section id="module-backtesting.group_backtesting">
+<span id="backtesting-group-backtesting-module"></span><h2>backtesting.group_backtesting module<a class="headerlink" href="#module-backtesting.group_backtesting" title="永久链接至标题">¶</a></h2>
+<dl class="py class">
+<dt id="backtesting.group_backtesting.GroupBacktesting">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">backtesting.group_backtesting.</span></code><code class="sig-name descname"><span class="pre">GroupBacktesting</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rate</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">period</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'end'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interest</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'simple'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">contract</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'main'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">price</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'close'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rebalance_num</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_num</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#backtesting.group_backtesting.GroupBacktesting" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="#backtesting.base.BaseBacktesting" title="backtesting.base.BaseBacktesting"><code class="xref py py-class docutils literal notranslate"><span class="pre">backtesting.base.BaseBacktesting</span></code></a></p>
+<p>分组回测系统</p>
+<p>分组回测系统会根据因子值将期货品种等分成若干组，做多每一组的品种，得到每一组的回测结果</p>
+<dl class="py attribute">
+<dt id="backtesting.group_backtesting.GroupBacktesting.group_df">
+<code class="sig-name descname"><span class="pre">group_df</span></code><a class="headerlink" href="#backtesting.group_backtesting.GroupBacktesting.group_df" title="永久链接至目标">¶</a></dt>
+<dd><p>根据因子值大小得到的分组结果，index为交易时间，columns为品种代码，分组为1，2，3，4，5，0表示不属于任何一组（不可交易）</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="backtesting.group_backtesting.GroupBacktesting.weight_df_dict">
+<code class="sig-name descname"><span class="pre">weight_df_dict</span></code><a class="headerlink" href="#backtesting.group_backtesting.GroupBacktesting.weight_df_dict" title="永久链接至目标">¶</a></dt>
+<dd><p>分组权重DataFrame的字典。为方便进行分组回测，将每组的权重DataFrame分成若干DataFrame，
+每个DataFrame中仅有租内的品种权重不为0，其他品种均为0。</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Dict[str, DataFrame]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="backtesting.group_backtesting.GroupBacktesting.backtesting">
+<code class="sig-name descname"><span class="pre">backtesting</span></code><a class="headerlink" href="#backtesting.group_backtesting.GroupBacktesting.backtesting" title="永久链接至目标">¶</a></dt>
+<dd><p>作为执行回测的回测引擎</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Union[<a class="reference internal" href="#backtesting.period_backtesting.LongShortPeriodBacktesting" title="backtesting.period_backtesting.LongShortPeriodBacktesting">LongShortPeriodBacktesting</a>, <a class="reference internal" href="#backtesting.period_backtesting.LongShortPeriodBacktesting" title="backtesting.period_backtesting.LongShortPeriodBacktesting">LongShortPeriodBacktesting</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="backtesting.group_backtesting.GroupBacktesting.backtesting_result_dict">
+<code class="sig-name descname"><span class="pre">backtesting_result_dict</span></code><a class="headerlink" href="#backtesting.group_backtesting.GroupBacktesting.backtesting_result_dict" title="永久链接至目标">¶</a></dt>
+<dd><p>每组回测的结果字典</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Dict[str, Any]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="backtesting.group_backtesting.GroupBacktesting.profit_series_dict">
+<code class="sig-name descname"><span class="pre">profit_series_dict</span></code><a class="headerlink" href="#backtesting.group_backtesting.GroupBacktesting.profit_series_dict" title="永久链接至目标">¶</a></dt>
+<dd><p>每组回测的日收益时间序列</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Dict[str, Series]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="backtesting.group_backtesting.GroupBacktesting.return_series_dict">
+<code class="sig-name descname"><span class="pre">return_series_dict</span></code><a class="headerlink" href="#backtesting.group_backtesting.GroupBacktesting.return_series_dict" title="永久链接至目标">¶</a></dt>
+<dd><p>每组回测的日收益率序列</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Dict[str, Series]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="backtesting.group_backtesting.GroupBacktesting.cum_profit_series_dict">
+<code class="sig-name descname"><span class="pre">cum_profit_series_dict</span></code><a class="headerlink" href="#backtesting.group_backtesting.GroupBacktesting.cum_profit_series_dict" title="永久链接至目标">¶</a></dt>
+<dd><p>每组回测的累积收益序列</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Dict[str, Series]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="backtesting.group_backtesting.GroupBacktesting.cum_return_series_dict">
+<code class="sig-name descname"><span class="pre">cum_return_series_dict</span></code><a class="headerlink" href="#backtesting.group_backtesting.GroupBacktesting.cum_return_series_dict" title="永久链接至目标">¶</a></dt>
+<dd><p>每组回测的累积收益率序列</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Dict[str, Series]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="admonition seealso">
+<p class="admonition-title">参见</p>
+<p><a class="reference internal" href="#backtesting.monthly_backtesting.LongShortMonthlyBacktesting" title="backtesting.monthly_backtesting.LongShortMonthlyBacktesting"><code class="xref py py-obj docutils literal notranslate"><span class="pre">backtesting.monthly_backtesting.LongShortMonthlyBacktesting</span></code></a>, <a class="reference internal" href="#backtesting.period_backtesting.LongShortPeriodBacktesting" title="backtesting.period_backtesting.LongShortPeriodBacktesting"><code class="xref py py-obj docutils literal notranslate"><span class="pre">backtesting.period_backtesting.LongShortPeriodBacktesting</span></code></a></p>
+</div>
+<dl class="py method">
+<dt id="backtesting.group_backtesting.GroupBacktesting.get_group_distribution_per_symbol">
+<code class="sig-name descname"><span class="pre">get_group_distribution_per_symbol</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">period</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#backtesting.group_backtesting.GroupBacktesting.get_group_distribution_per_symbol" title="永久链接至目标">¶</a></dt>
+<dd><p>获取各品种在各组的分布（包括已上市但被商品池排除的组）</p>
+<dl class="py attribute">
+<dt id="backtesting.group_backtesting.GroupBacktesting.period">
+<code class="sig-name descname"><span class="pre">period</span></code><a class="headerlink" href="#backtesting.group_backtesting.GroupBacktesting.period" title="永久链接至目标">¶</a></dt>
+<dd><p>采样间隔多少个交易日</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int, default None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="backtesting.group_backtesting.GroupBacktesting.shift">
+<code class="sig-name descname"><span class="pre">shift</span></code><a class="headerlink" href="#backtesting.group_backtesting.GroupBacktesting.shift" title="永久链接至目标">¶</a></dt>
+<dd><p>从第几个交易日开始采样。如果shift=0, period=20，则取第1, 21, 41, …个交易日</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int, default 0</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="backtesting.group_backtesting.GroupBacktesting.start">
+<code class="sig-name descname"><span class="pre">start</span></code><a class="headerlink" href="#backtesting.group_backtesting.GroupBacktesting.start" title="永久链接至目标">¶</a></dt>
+<dd><p>起始日期</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str, default None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="backtesting.group_backtesting.GroupBacktesting.end">
+<code class="sig-name descname"><span class="pre">end</span></code><a class="headerlink" href="#backtesting.group_backtesting.GroupBacktesting.end" title="永久链接至目标">¶</a></dt>
+<dd><p>结束日期</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str, default None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="field-list simple">
+<dt class="field-odd">返回</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">返回类型</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="backtesting.group_backtesting.GroupBacktesting.get_groupby_pool_in_out">
+<code class="sig-name descname"><span class="pre">get_groupby_pool_in_out</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">period</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(30,</span> <span class="pre">8)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">heatmap_rotation1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">heatmap_rotation2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">annot_fontsize1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">annot_fontsize2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">30</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#backtesting.group_backtesting.GroupBacktesting.get_groupby_pool_in_out" title="永久链接至目标">¶</a></dt>
+<dd><p>获取商品池进出每个组的情况，返回</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="backtesting.group_backtesting.GroupBacktesting.load_setting">
+<code class="sig-name descname"><span class="pre">load_setting</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#backtesting.group_backtesting.GroupBacktesting.load_setting" title="永久链接至目标">¶</a></dt>
+<dd><p>加载回测信息</p>
+<dl class="field-list simple">
+<dt class="field-odd">返回</dt>
+<dd class="field-odd"><p><strong>settings</strong> – 回测信息</p>
+</dd>
+<dt class="field-even">返回类型</dt>
+<dd class="field-even"><p>Dict[str, Any]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="backtesting.group_backtesting.GroupBacktesting.output_backtest_result">
+<code class="sig-name descname"><span class="pre">output_backtest_result</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#backtesting.group_backtesting.GroupBacktesting.output_backtest_result" title="永久链接至目标">¶</a></dt>
+<dd><p>输出回测结果</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><p><strong>overwrite</strong> (<em>bool</em><em>, </em><em>default True</em>) – 是否覆盖已有的</p>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="backtesting.group_backtesting.GroupBacktesting.run_backtesting">
+<code class="sig-name descname"><span class="pre">run_backtesting</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#backtesting.group_backtesting.GroupBacktesting.run_backtesting" title="永久链接至目标">¶</a></dt>
+<dd><p>运行分组回测</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="backtesting.group_backtesting.GroupBacktesting.save_setting">
+<code class="sig-name descname"><span class="pre">save_setting</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">settings</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#backtesting.group_backtesting.GroupBacktesting.save_setting" title="永久链接至目标">¶</a></dt>
+<dd><p>保存回测信息</p>
+<p>参数字典字符串: backtest_id</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><p><strong>settings</strong> (<em>参数字典</em>) – </p>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-backtesting.metrics">
+<span id="backtesting-metrics-module"></span><h2>backtesting.metrics module<a class="headerlink" href="#module-backtesting.metrics" title="永久链接至标题">¶</a></h2>
+<dl class="py function">
+<dt id="backtesting.metrics.get_metrics">
+<code class="sig-prename descclassname"><span class="pre">backtesting.metrics.</span></code><code class="sig-name descname"><span class="pre">get_metrics</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">weight_df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hold_weight_df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symbol_industry_map</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">turnover_df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hold_turnover_df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init_total_value</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">profit_df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hold_profit_df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interest</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#backtesting.metrics.get_metrics" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-backtesting.monthly_backtesting">
+<span id="backtesting-monthly-backtesting-module"></span><h2>backtesting.monthly_backtesting module<a class="headerlink" href="#module-backtesting.monthly_backtesting" title="永久链接至标题">¶</a></h2>
+<dl class="py class">
+<dt id="backtesting.monthly_backtesting.LongShortMonthlyBacktesting">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">backtesting.monthly_backtesting.</span></code><code class="sig-name descname"><span class="pre">LongShortMonthlyBacktesting</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rate</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">period</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'end'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interest</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'simple'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">contract</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'main'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">price</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'close'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rebalance_num</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#backtesting.monthly_backtesting.LongShortMonthlyBacktesting" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="#backtesting.base.BaseBacktesting" title="backtesting.base.BaseBacktesting"><code class="xref py py-class docutils literal notranslate"><span class="pre">backtesting.base.BaseBacktesting</span></code></a></p>
+<p>多空组合，月末调仓回测系统</p>
+<dl class="py method">
+<dt id="backtesting.monthly_backtesting.LongShortMonthlyBacktesting.run_backtesting">
+<code class="sig-name descname"><span class="pre">run_backtesting</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tqdm_flag</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#backtesting.monthly_backtesting.LongShortMonthlyBacktesting.run_backtesting" title="永久链接至目标">¶</a></dt>
+<dd><p>执行回测</p>
+<dl class="field-list simple">
+<dt class="field-odd">返回</dt>
+<dd class="field-odd"><p><strong>backtest_result</strong> – 回测结果</p>
+</dd>
+<dt class="field-even">返回类型</dt>
+<dd class="field-even"><p>Tuple[Dict]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-backtesting.period_backtesting">
+<span id="backtesting-period-backtesting-module"></span><h2>backtesting.period_backtesting module<a class="headerlink" href="#module-backtesting.period_backtesting" title="永久链接至标题">¶</a></h2>
+<dl class="py class">
+<dt id="backtesting.period_backtesting.LongShortPeriodBacktesting">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">backtesting.period_backtesting.</span></code><code class="sig-name descname"><span class="pre">LongShortPeriodBacktesting</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rate</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">period</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interest</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'simple'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">contract</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'main'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">price</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'close'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rebalance_num</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#backtesting.period_backtesting.LongShortPeriodBacktesting" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="#backtesting.base.BaseBacktesting" title="backtesting.base.BaseBacktesting"><code class="xref py py-class docutils literal notranslate"><span class="pre">backtesting.base.BaseBacktesting</span></code></a></p>
+<p>定期调仓、起始日平滑回测系统
+需要的数据:</p>
+<blockquote>
+<div><p>1.因子值: DataFrame, index为交易时间(datetime), columns为品种(underlying_symbol), data为因子值
+2.品种价格指数: DataFrame, index为交易时间(datetime), columns为品种(underlying_symbol), data为主力连续合约价格</p>
+</div></blockquote>
+<dl class="simple">
+<dt>设置的参数:</dt><dd><p>1.调仓周期period
+2.交易费用rate
+3.单利or复利interest
+4.用于计算收益的连续</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="backtesting.period_backtesting.LongShortPeriodBacktesting.run_backtesting">
+<code class="sig-name descname"><span class="pre">run_backtesting</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tqdm_flag</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#backtesting.period_backtesting.LongShortPeriodBacktesting.run_backtesting" title="永久链接至目标">¶</a></dt>
+<dd><p>运行回测</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><p><strong>tqdm_flag</strong> (<em>bool</em><em>, </em><em>default True</em>) – </p>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-backtesting.time_series_backtesting">
+<span id="backtesting-time-series-backtesting-module"></span><h2>backtesting.time_series_backtesting module<a class="headerlink" href="#module-backtesting.time_series_backtesting" title="永久链接至标题">¶</a></h2>
+<dl class="py class">
+<dt id="backtesting.time_series_backtesting.TimeSeriesBacktesting">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">backtesting.time_series_backtesting.</span></code><code class="sig-name descname"><span class="pre">TimeSeriesBacktesting</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rate</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">period</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interest</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'simple'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">contract</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'main'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">price</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'close'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rebalance_num</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#backtesting.time_series_backtesting.TimeSeriesBacktesting" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="#backtesting.base.BaseBacktesting" title="backtesting.base.BaseBacktesting"><code class="xref py py-class docutils literal notranslate"><span class="pre">backtesting.base.BaseBacktesting</span></code></a></p>
+<p>定期调仓、起始日平滑时间序列回测系统
+需要的数据:</p>
+<blockquote>
+<div><p>1.因子值: DataFrame, index为交易时间(datetime), columns为品种(underlying_symbol), data为因子值
+2.品种价格指数: DataFrame, index为交易时间(datetime), columns为品种(underlying_symbol), data为主力连续合约价格</p>
+</div></blockquote>
+<dl class="simple">
+<dt>设置的参数:</dt><dd><p>1.调仓周期period
+2.交易费用rate
+3.单利or复利interest
+4.用于计算收益的连续</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="backtesting.time_series_backtesting.TimeSeriesBacktesting.run_backtesting">
+<code class="sig-name descname"><span class="pre">run_backtesting</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tqdm_flag</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#backtesting.time_series_backtesting.TimeSeriesBacktesting.run_backtesting" title="永久链接至目标">¶</a></dt>
+<dd><p>运行回测</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><p><strong>tqdm_flag</strong> (<em>bool</em><em>, </em><em>default True</em>) – </p>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-backtesting">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-backtesting" title="永久链接至标题">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Commodity Futures Factor Backtesting Framework</a></h1>
+
+
+
+
+
+
+
+
+<h3>导航</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">快速搜索</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="转向" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Luo Feng.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/backtesting.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

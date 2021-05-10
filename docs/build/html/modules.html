@@ -1,0 +1,346 @@
+
+<!DOCTYPE html>
+
+<html lang="zh_cn">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
+    <title>NewPythonProject &#8212; Commodity Futures Factor Backtesting Framework 1.0 文档</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/translations.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="newpythonproject">
+<h1>NewPythonProject<a class="headerlink" href="#newpythonproject" title="永久链接至标题">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="atr_analysis.html">atr_analysis package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="atr_analysis.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="atr_analysis.html#module-atr_analysis.base">atr_analysis.base module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="atr_analysis.html#module-atr_analysis">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="backtesting.html">backtesting package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="backtesting.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backtesting.html#module-backtesting.backtest_utility">backtesting.backtest_utility module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backtesting.html#module-backtesting.base">backtesting.base module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backtesting.html#module-backtesting.display">backtesting.display module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backtesting.html#module-backtesting.group_backtesting">backtesting.group_backtesting module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backtesting.html#module-backtesting.metrics">backtesting.metrics module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backtesting.html#module-backtesting.monthly_backtesting">backtesting.monthly_backtesting module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backtesting.html#module-backtesting.period_backtesting">backtesting.period_backtesting module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backtesting.html#module-backtesting.time_series_backtesting">backtesting.time_series_backtesting module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backtesting.html#module-backtesting">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="bases.html">bases package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="bases.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bases.html#module-bases.base">bases.base module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bases.html#module-bases">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="commodity_pool.html">commodity_pool package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="commodity_pool.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="commodity_pool.DynamicPool.html">commodity_pool.DynamicPool package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="commodity_pool.DynamicPool.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commodity_pool.DynamicPool.html#module-commodity_pool.DynamicPool.DynamicPool1">commodity_pool.DynamicPool.DynamicPool1 module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commodity_pool.DynamicPool.html#module-commodity_pool.DynamicPool.DynamicPool2">commodity_pool.DynamicPool.DynamicPool2 module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commodity_pool.DynamicPool.html#module-commodity_pool.DynamicPool.DynamicPool3">commodity_pool.DynamicPool.DynamicPool3 module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commodity_pool.DynamicPool.html#module-commodity_pool.DynamicPool.DynamicPool4">commodity_pool.DynamicPool.DynamicPool4 module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commodity_pool.DynamicPool.html#module-commodity_pool.DynamicPool.DynamicPool5">commodity_pool.DynamicPool.DynamicPool5 module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commodity_pool.DynamicPool.html#module-commodity_pool.DynamicPool">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="commodity_pool.FixedPool.html">commodity_pool.FixedPool package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="commodity_pool.FixedPool.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commodity_pool.FixedPool.html#module-commodity_pool.FixedPool.FixedPool1">commodity_pool.FixedPool.FixedPool1 module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commodity_pool.FixedPool.html#module-commodity_pool.FixedPool">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="commodity_pool.IndustryPool.html">commodity_pool.IndustryPool package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="commodity_pool.IndustryPool.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commodity_pool.IndustryPool.html#module-commodity_pool.IndustryPool.IndustryPool1">commodity_pool.IndustryPool.IndustryPool1 module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commodity_pool.IndustryPool.html#module-commodity_pool.IndustryPool">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="commodity_pool.NullPool.html">commodity_pool.NullPool package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="commodity_pool.NullPool.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commodity_pool.NullPool.html#module-commodity_pool.NullPool.NullPool1">commodity_pool.NullPool.NullPool1 module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commodity_pool.NullPool.html#module-commodity_pool.NullPool">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="commodity_pool.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commodity_pool.html#module-commodity_pool.base">commodity_pool.base module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commodity_pool.html#module-commodity_pool">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="continuous_contract.html">continuous_contract package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="continuous_contract.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="continuous_contract.html#module-continuous_contract.ContinuousMainContract">continuous_contract.ContinuousMainContract module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="continuous_contract.html#module-continuous_contract">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="correlation_analysis.html">correlation_analysis package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="correlation_analysis.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="correlation_analysis.html#module-correlation_analysis.analysis">correlation_analysis.analysis module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="correlation_analysis.html#module-correlation_analysis.factor_analysis">correlation_analysis.factor_analysis module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="correlation_analysis.html#module-correlation_analysis">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="data_manager.html">data_manager package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="data_manager.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_manager.html#module-data_manager.BasicsDataManager">data_manager.BasicsDataManager module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_manager.html#module-data_manager.CommodityPoolManager">data_manager.CommodityPoolManager module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_manager.html#module-data_manager.ContinuousContractDataManager">data_manager.ContinuousContractDataManager module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_manager.html#module-data_manager.DailyDataManager">data_manager.DailyDataManager module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_manager.html#module-data_manager.FactorDataManager">data_manager.FactorDataManager module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_manager.html#module-data_manager.IndexDataManager">data_manager.IndexDataManager module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_manager.html#module-data_manager.IndustryDataManager">data_manager.IndustryDataManager module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_manager.html#module-data_manager.TradeHoldDataManager">data_manager.TradeHoldDataManager module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_manager.html#module-data_manager">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="display.html">display package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="display.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="display.html#module-display.base">display.base module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="display.html#module-display.search">display.search module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="display.html#module-display.word_template">display.word_template module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="display.html#module-display">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="engine.html">engine package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="engine.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="engine.html#module-engine.engine">engine.engine module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="engine.html#module-engine">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="factor.html">factor package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="factor.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="factor.CarryFactor.html">factor.CarryFactor package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="factor.CarryFactor.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="factor.CarryFactor.html#module-factor.CarryFactor.FarNearFactor">factor.CarryFactor.FarNearFactor module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="factor.CarryFactor.html#module-factor.CarryFactor.MainNearFactor1">factor.CarryFactor.MainNearFactor1 module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="factor.CarryFactor.html#module-factor.CarryFactor.MainNearFactor2">factor.CarryFactor.MainNearFactor2 module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="factor.CarryFactor.html#module-factor.CarryFactor.MainNearFactor3">factor.CarryFactor.MainNearFactor3 module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="factor.CarryFactor.html#module-factor.CarryFactor.MainNearFactor4">factor.CarryFactor.MainNearFactor4 module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="factor.CarryFactor.html#module-factor.CarryFactor.MainSubFactor1">factor.CarryFactor.MainSubFactor1 module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="factor.CarryFactor.html#module-factor.CarryFactor.MainSubFactor2">factor.CarryFactor.MainSubFactor2 module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="factor.CarryFactor.html#module-factor.CarryFactor.SlopeFactor1">factor.CarryFactor.SlopeFactor1 module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="factor.CarryFactor.html#module-factor.CarryFactor.base">factor.CarryFactor.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="factor.CarryFactor.html#module-factor.CarryFactor">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="factor.MomentumFactor.html">factor.MomentumFactor package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="factor.MomentumFactor.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="factor.MomentumFactor.html#module-factor.MomentumFactor.MomentumFactor1">factor.MomentumFactor.MomentumFactor1 module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="factor.MomentumFactor.html#module-factor.MomentumFactor.MomentumFactor2">factor.MomentumFactor.MomentumFactor2 module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="factor.MomentumFactor.html#module-factor.MomentumFactor.MomentumFactor3">factor.MomentumFactor.MomentumFactor3 module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="factor.MomentumFactor.html#module-factor.MomentumFactor.base">factor.MomentumFactor.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="factor.MomentumFactor.html#module-factor.MomentumFactor">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="factor.TradeHoldFactor.html">factor.TradeHoldFactor package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="factor.TradeHoldFactor.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="factor.TradeHoldFactor.html#module-factor.TradeHoldFactor.BilateralTradeHoldFactor1">factor.TradeHoldFactor.BilateralTradeHoldFactor1 module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="factor.TradeHoldFactor.html#module-factor.TradeHoldFactor.BilateralTradeHoldFactor2">factor.TradeHoldFactor.BilateralTradeHoldFactor2 module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="factor.TradeHoldFactor.html#module-factor.TradeHoldFactor.UnilateralTradeHoldFactor1">factor.TradeHoldFactor.UnilateralTradeHoldFactor1 module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="factor.TradeHoldFactor.html#module-factor.TradeHoldFactor.UnilateralTradeHoldFactor2">factor.TradeHoldFactor.UnilateralTradeHoldFactor2 module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="factor.TradeHoldFactor.html#module-factor.TradeHoldFactor.base">factor.TradeHoldFactor.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="factor.TradeHoldFactor.html#module-factor.TradeHoldFactor">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="factor.VolatilityFactor.html">factor.VolatilityFactor package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="factor.VolatilityFactor.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="factor.VolatilityFactor.html#module-factor.VolatilityFactor.VolatilityFactor1">factor.VolatilityFactor.VolatilityFactor1 module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="factor.VolatilityFactor.html#module-factor.VolatilityFactor.base">factor.VolatilityFactor.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="factor.VolatilityFactor.html#module-factor.VolatilityFactor">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="factor.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="factor.html#module-factor.base">factor.base module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="factor.html#module-factor.contract_utility">factor.contract_utility module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="factor.html#module-factor.factor_test">factor.factor_test module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="factor.html#module-factor">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="factor_test.html">factor_test package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="factor_test.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="factor_test.html#module-factor_test.base">factor_test.base module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="factor_test.html#module-factor_test">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="logging_manager.html">logging_manager package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="logging_manager.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging_manager.html#module-logging_manager.LoggingManager">logging_manager.LoggingManager module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging_manager.html#module-logging_manager">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="signals.html">signals package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="signals.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="signals.CompositeSignal.html">signals.CompositeSignal package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="signals.CompositeSignal.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="signals.CompositeSignal.html#module-signals.CompositeSignal.CompositeSignal1">signals.CompositeSignal.CompositeSignal1 module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="signals.CompositeSignal.html#module-signals.CompositeSignal.CompositeSignal2">signals.CompositeSignal.CompositeSignal2 module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="signals.CompositeSignal.html#module-signals.CompositeSignal.base">signals.CompositeSignal.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="signals.CompositeSignal.html#module-signals.CompositeSignal">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="signals.CrossSectionSignal.html">signals.CrossSectionSignal package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="signals.CrossSectionSignal.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="signals.CrossSectionSignal.html#module-signals.CrossSectionSignal.CrossSectionSignal1">signals.CrossSectionSignal.CrossSectionSignal1 module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="signals.CrossSectionSignal.html#module-signals.CrossSectionSignal.base">signals.CrossSectionSignal.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="signals.CrossSectionSignal.html#module-signals.CrossSectionSignal">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="signals.GroupSignal.html">signals.GroupSignal package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="signals.GroupSignal.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="signals.GroupSignal.html#module-signals.GroupSignal.GroupLongSignal1">signals.GroupSignal.GroupLongSignal1 module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="signals.GroupSignal.html#module-signals.GroupSignal.GroupNLongSignal1">signals.GroupSignal.GroupNLongSignal1 module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="signals.GroupSignal.html#module-signals.GroupSignal.GroupPLongSignal1">signals.GroupSignal.GroupPLongSignal1 module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="signals.GroupSignal.html#module-signals.GroupSignal.base">signals.GroupSignal.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="signals.GroupSignal.html#module-signals.GroupSignal">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="signals.TimeSeriesSignal.html">signals.TimeSeriesSignal package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="signals.TimeSeriesSignal.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="signals.TimeSeriesSignal.html#module-signals.TimeSeriesSignal.TimeSeriesSignal1">signals.TimeSeriesSignal.TimeSeriesSignal1 module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="signals.TimeSeriesSignal.html#module-signals.TimeSeriesSignal.base">signals.TimeSeriesSignal.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="signals.TimeSeriesSignal.html#module-signals.TimeSeriesSignal">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="signals.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="signals.html#module-signals.base">signals.base module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="signals.html#module-signals">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="weight.html">weight package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="weight.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="weight.EqualWeight.html">weight.EqualWeight package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="weight.EqualWeight.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="weight.EqualWeight.html#module-weight.EqualWeight.NoRiskNeutralEqualWeight">weight.EqualWeight.NoRiskNeutralEqualWeight module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="weight.EqualWeight.html#module-weight.EqualWeight.RiskNeutralEqualWeight">weight.EqualWeight.RiskNeutralEqualWeight module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="weight.EqualWeight.html#module-weight.EqualWeight">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="weight.GroupWeight.html">weight.GroupWeight package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="weight.GroupWeight.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="weight.GroupWeight.html#module-weight.GroupWeight.GroupEqualWeight">weight.GroupWeight.GroupEqualWeight module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="weight.GroupWeight.html#module-weight.GroupWeight.base">weight.GroupWeight.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="weight.GroupWeight.html#module-weight.GroupWeight">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="weight.TimeSeriesWeight.html">weight.TimeSeriesWeight package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="weight.TimeSeriesWeight.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="weight.TimeSeriesWeight.html#module-weight.TimeSeriesWeight.TimeSeriesEqualWeight1">weight.TimeSeriesWeight.TimeSeriesEqualWeight1 module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="weight.TimeSeriesWeight.html#module-weight.TimeSeriesWeight">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="weight.VolWeight.html">weight.VolWeight package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="weight.VolWeight.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="weight.VolWeight.html#module-weight.VolWeight.base">weight.VolWeight.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="weight.VolWeight.html#module-weight.VolWeight">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="weight.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="weight.html#module-weight.base">weight.base module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="weight.html#module-weight">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Commodity Futures Factor Backtesting Framework</a></h1>
+
+
+
+
+
+
+
+
+<h3>导航</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">快速搜索</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="转向" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Luo Feng.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/modules.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

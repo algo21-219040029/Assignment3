@@ -1,0 +1,174 @@
+
+<!DOCTYPE html>
+
+<html lang="zh_cn">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
+    <title>weight.GroupWeight package &#8212; Commodity Futures Factor Backtesting Framework 1.0 文档</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/translations.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="weight-groupweight-package">
+<h1>weight.GroupWeight package<a class="headerlink" href="#weight-groupweight-package" title="永久链接至标题">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="永久链接至标题">¶</a></h2>
+</section>
+<section id="module-weight.GroupWeight.GroupEqualWeight">
+<span id="weight-groupweight-groupequalweight-module"></span><h2>weight.GroupWeight.GroupEqualWeight module<a class="headerlink" href="#module-weight.GroupWeight.GroupEqualWeight" title="永久链接至标题">¶</a></h2>
+<dl class="py class">
+<dt id="weight.GroupWeight.GroupEqualWeight.GroupEqualWeight">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">weight.GroupWeight.GroupEqualWeight.</span></code><code class="sig-name descname"><span class="pre">GroupEqualWeight</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weight.GroupWeight.GroupEqualWeight.GroupEqualWeight" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="#weight.GroupWeight.base.BaseGroupWeight" title="weight.GroupWeight.base.BaseGroupWeight"><code class="xref py py-class docutils literal notranslate"><span class="pre">weight.GroupWeight.base.BaseGroupWeight</span></code></a></p>
+<dl class="py method">
+<dt id="weight.GroupWeight.GroupEqualWeight.GroupEqualWeight.get_single_weight">
+<code class="sig-name descname"><span class="pre">get_single_weight</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">single_signal_df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="headerlink" href="#weight.GroupWeight.GroupEqualWeight.GroupEqualWeight.get_single_weight" title="永久链接至目标">¶</a></dt>
+<dd><p>获取因子各组的权重DataFrame</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><p><strong>signle_signal_df</strong> (<em>DataFrame</em>) – 单一组别的信号DataFrame, index为交易时间,columns为品种代码，data为信号</p>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>因子各组的权重DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-weight.GroupWeight.base">
+<span id="weight-groupweight-base-module"></span><h2>weight.GroupWeight.base module<a class="headerlink" href="#module-weight.GroupWeight.base" title="永久链接至标题">¶</a></h2>
+<dl class="py class">
+<dt id="weight.GroupWeight.base.BaseGroupWeight">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">weight.GroupWeight.base.</span></code><code class="sig-name descname"><span class="pre">BaseGroupWeight</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weight.GroupWeight.base.BaseGroupWeight" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="weight.html#weight.base.BaseWeight" title="weight.base.BaseWeight"><code class="xref py py-class docutils literal notranslate"><span class="pre">weight.base.BaseWeight</span></code></a></p>
+<dl class="py method">
+<dt id="weight.GroupWeight.base.BaseGroupWeight.get_single_weight">
+<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">get_single_weight</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">single_signal_df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="headerlink" href="#weight.GroupWeight.base.BaseGroupWeight.get_single_weight" title="永久链接至目标">¶</a></dt>
+<dd><p>获取因子各组的权重DataFrame</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><p><strong>signle_signal_df</strong> (<em>DataFrame</em>) – 单一组别的信号DataFrame, index为交易时间,columns为品种代码，data为信号</p>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>因子各组的权重DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="weight.GroupWeight.base.BaseGroupWeight.get_weight">
+<code class="sig-name descname"><span class="pre">get_weight</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">pandas.core.frame.DataFrame</span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#weight.GroupWeight.base.BaseGroupWeight.get_weight" title="永久链接至目标">¶</a></dt>
+<dd><p>获取因子的权重DataFrame字典</p>
+<dl class="field-list simple">
+<dt class="field-odd">返回</dt>
+<dd class="field-odd"><p><strong>weight_df_dict</strong> – 因子的权重DataFrame字典</p>
+</dd>
+<dt class="field-even">返回类型</dt>
+<dd class="field-even"><p>Dict[int, DataFrame]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-weight.GroupWeight">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-weight.GroupWeight" title="永久链接至标题">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Commodity Futures Factor Backtesting Framework</a></h1>
+
+
+
+
+
+
+
+
+<h3>导航</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">快速搜索</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="转向" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Luo Feng.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/weight.GroupWeight.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

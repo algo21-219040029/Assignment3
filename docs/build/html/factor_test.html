@@ -1,0 +1,248 @@
+
+<!DOCTYPE html>
+
+<html lang="zh_cn">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
+    <title>factor_test package &#8212; Commodity Futures Factor Backtesting Framework 1.0 文档</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/translations.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="factor-test-package">
+<h1>factor_test package<a class="headerlink" href="#factor-test-package" title="永久链接至标题">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="永久链接至标题">¶</a></h2>
+</section>
+<section id="module-factor_test.base">
+<span id="factor-test-base-module"></span><h2>factor_test.base module<a class="headerlink" href="#module-factor_test.base" title="永久链接至标题">¶</a></h2>
+<dl class="py class">
+<dt id="factor_test.base.BaseFactorTest">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">factor_test.base.</span></code><code class="sig-name descname"><span class="pre">BaseFactorTest</span></code><a class="headerlink" href="#factor_test.base.BaseFactorTest" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="bases.html#bases.base.BaseClass" title="bases.base.BaseClass"><code class="xref py py-class docutils literal notranslate"><span class="pre">bases.base.BaseClass</span></code></a></p>
+<dl class="py method">
+<dt id="factor_test.base.BaseFactorTest.get_Frank_vs_Rrank">
+<code class="sig-name descname"><span class="pre">get_Frank_vs_Rrank</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group_num</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">period</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">industry</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#factor_test.base.BaseFactorTest.get_Frank_vs_Rrank" title="永久链接至目标">¶</a></dt>
+<dd><p>获取因子rank分组与收益率rank的violin plot</p>
+<dl class="py attribute">
+<dt id="factor_test.base.BaseFactorTest.group_num">
+<code class="sig-name descname"><span class="pre">group_num</span></code><a class="headerlink" href="#factor_test.base.BaseFactorTest.group_num" title="永久链接至目标">¶</a></dt>
+<dd><p>分组组数</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int, default 5</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="factor_test.base.BaseFactorTest.period">
+<code class="sig-name descname"><span class="pre">period</span></code><a class="headerlink" href="#factor_test.base.BaseFactorTest.period" title="永久链接至目标">¶</a></dt>
+<dd><p>收益率周期长度</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int, default 1</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="factor_test.base.BaseFactorTest.start">
+<code class="sig-name descname"><span class="pre">start</span></code><a class="headerlink" href="#factor_test.base.BaseFactorTest.start" title="永久链接至目标">¶</a></dt>
+<dd><p>起始日期</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str, default None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="factor_test.base.BaseFactorTest.end">
+<code class="sig-name descname"><span class="pre">end</span></code><a class="headerlink" href="#factor_test.base.BaseFactorTest.end" title="永久链接至目标">¶</a></dt>
+<dd><p>结束日期</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str, default None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="field-list simple">
+<dt class="field-odd">返回</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">返回类型</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="factor_test.base.BaseFactorTest.get_factor_PN_stats">
+<code class="sig-name descname"><span class="pre">get_factor_PN_stats</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#factor_test.base.BaseFactorTest.get_factor_PN_stats" title="永久链接至目标">¶</a></dt>
+<dd><p>统计每个品种:
+1.因子值大于0的天数占总天数的比例
+2.因子值小于0的天数占总天数的比例
+3.上穿天数的比例
+4.下穿天数的比例</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="factor_test.base.BaseFactorTest.get_factor_autocorrelation">
+<code class="sig-name descname"><span class="pre">get_factor_autocorrelation</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#factor_test.base.BaseFactorTest.get_factor_autocorrelation" title="永久链接至目标">¶</a></dt>
+<dd><p>获取因子自相关性图</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><p><strong>params</strong> (<em>参数</em><em>, </em><em>包括输出图的figsize</em><em>, </em><em>滞后期数lags</em>) – </p>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="factor_test.base.BaseFactorTest.get_factor_distribution_per_symbol">
+<code class="sig-name descname"><span class="pre">get_factor_distribution_per_symbol</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#factor_test.base.BaseFactorTest.get_factor_distribution_per_symbol" title="永久链接至目标">¶</a></dt>
+<dd><p>画每个品种的因子分布violin图</p>
+<dl class="field-list simple">
+<dt class="field-odd">返回</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">返回类型</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="factor_test.base.BaseFactorTest.get_factor_time_series">
+<code class="sig-name descname"><span class="pre">get_factor_time_series</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">period</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#factor_test.base.BaseFactorTest.get_factor_time_series" title="永久链接至目标">¶</a></dt>
+<dd><p>获取因子时序图</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><p><strong>period</strong> (<em>int</em><em>, </em><em>default 1</em>) – 持有期</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="factor_test.base.BaseFactorTest.set_factor">
+<code class="sig-name descname"><span class="pre">set_factor</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#factor_test.base.BaseFactorTest.set_factor" title="永久链接至目标">¶</a></dt>
+<dd><p>设置因子</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>group</strong> (<em>str</em>) – 因子类别</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – 因子名称</p></li>
+<li><p><strong>params</strong> (<em>因子参数</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-factor_test">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-factor_test" title="永久链接至标题">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Commodity Futures Factor Backtesting Framework</a></h1>
+
+
+
+
+
+
+
+
+<h3>导航</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">快速搜索</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="转向" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Luo Feng.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/factor_test.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

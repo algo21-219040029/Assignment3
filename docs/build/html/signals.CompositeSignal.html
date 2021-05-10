@@ -1,0 +1,225 @@
+
+<!DOCTYPE html>
+
+<html lang="zh_cn">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
+    <title>signals.CompositeSignal package &#8212; Commodity Futures Factor Backtesting Framework 1.0 文档</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/translations.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="signals-compositesignal-package">
+<h1>signals.CompositeSignal package<a class="headerlink" href="#signals-compositesignal-package" title="永久链接至标题">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="永久链接至标题">¶</a></h2>
+</section>
+<section id="module-signals.CompositeSignal.CompositeSignal1">
+<span id="signals-compositesignal-compositesignal1-module"></span><h2>signals.CompositeSignal.CompositeSignal1 module<a class="headerlink" href="#module-signals.CompositeSignal.CompositeSignal1" title="永久链接至标题">¶</a></h2>
+<dl class="py class">
+<dt id="signals.CompositeSignal.CompositeSignal1.CompositeSignal1">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">signals.CompositeSignal.CompositeSignal1.</span></code><code class="sig-name descname"><span class="pre">CompositeSignal1</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">quantile</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rank</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'descending'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#signals.CompositeSignal.CompositeSignal1.CompositeSignal1" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="#signals.CompositeSignal.base.BaseCompositeSignal" title="signals.CompositeSignal.base.BaseCompositeSignal"><code class="xref py py-class docutils literal notranslate"><span class="pre">signals.CompositeSignal.base.BaseCompositeSignal</span></code></a></p>
+<p>复合信号生成器1</p>
+<p>1.先根据0将因子值分成大于0和小于0的两组</p>
+<ol class="arabic simple" start="2">
+<li></li>
+</ol>
+<dl class="simple">
+<dt>if rank == ‘descending’:</dt><dd><p>大于0的组中取大于quantile分位数的品种做多, 小于0的组小于1-quantile分位数的品种做空</p>
+</dd>
+<dt>if rank == ‘ascending’:</dt><dd><p>大于0的组中取大于quantile分位数的品种做空, 小于0的组小于1-quantile分位数的品种做多</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="signals.CompositeSignal.CompositeSignal1.CompositeSignal1.quantile">
+<code class="sig-name descname"><span class="pre">quantile</span></code><a class="headerlink" href="#signals.CompositeSignal.CompositeSignal1.CompositeSignal1.quantile" title="永久链接至目标">¶</a></dt>
+<dd><p>分位数, 0 &lt; quantile &lt;1</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float, default 0.5</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="signals.CompositeSignal.CompositeSignal1.CompositeSignal1.rank">
+<code class="sig-name descname"><span class="pre">rank</span></code><a class="headerlink" href="#signals.CompositeSignal.CompositeSignal1.CompositeSignal1.rank" title="永久链接至目标">¶</a></dt>
+<dd><p>排序方式, descending表示因子值大的做多, ascending表示因子值小的做多</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str, default descending</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="signals.CompositeSignal.CompositeSignal1.CompositeSignal1.transform">
+<code class="sig-name descname"><span class="pre">transform</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="headerlink" href="#signals.CompositeSignal.CompositeSignal1.CompositeSignal1.transform" title="永久链接至目标">¶</a></dt>
+<dd><p>生成信号, 1表示做多, -1表示做空,
+:returns: <strong>signal_df</strong> – 信号DataFrame, index为交易时间, columns为品种代码, data为信号值
+:rtype: DataFrame</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-signals.CompositeSignal.CompositeSignal2">
+<span id="signals-compositesignal-compositesignal2-module"></span><h2>signals.CompositeSignal.CompositeSignal2 module<a class="headerlink" href="#module-signals.CompositeSignal.CompositeSignal2" title="永久链接至标题">¶</a></h2>
+<dl class="py class">
+<dt id="signals.CompositeSignal.CompositeSignal2.CompositeSignal2">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">signals.CompositeSignal.CompositeSignal2.</span></code><code class="sig-name descname"><span class="pre">CompositeSignal2</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">quantile</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rank</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'descending'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#signals.CompositeSignal.CompositeSignal2.CompositeSignal2" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="#signals.CompositeSignal.base.BaseCompositeSignal" title="signals.CompositeSignal.base.BaseCompositeSignal"><code class="xref py py-class docutils literal notranslate"><span class="pre">signals.CompositeSignal.base.BaseCompositeSignal</span></code></a></p>
+<p>复合信号生成器2</p>
+<p>1.先计算quantile分位数和1-quantile分位数(quantile必须大于0.5小于1.0)</p>
+<p>2.
+if rank == ‘descending’:</p>
+<blockquote>
+<div><p>大于0的组中取大于quantile分位数的品种做多, 小于0的组小于1-quantile分位数的品种做空</p>
+</div></blockquote>
+<dl class="simple">
+<dt>if rank == ‘ascending’:</dt><dd><p>大于0的组中取大于quantile分位数的品种做空, 小于0的组小于1-quantile分位数的品种做多</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="signals.CompositeSignal.CompositeSignal2.CompositeSignal2.quantile">
+<code class="sig-name descname"><span class="pre">quantile</span></code><a class="headerlink" href="#signals.CompositeSignal.CompositeSignal2.CompositeSignal2.quantile" title="永久链接至目标">¶</a></dt>
+<dd><p>分位数, 0.5 &lt; quantile &lt;1</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float, default 0.5</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="signals.CompositeSignal.CompositeSignal2.CompositeSignal2.rank">
+<code class="sig-name descname"><span class="pre">rank</span></code><a class="headerlink" href="#signals.CompositeSignal.CompositeSignal2.CompositeSignal2.rank" title="永久链接至目标">¶</a></dt>
+<dd><p>排序方式, descending表示因子值大的做多, ascending表示因子值小的做多</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str, default descending</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="signals.CompositeSignal.CompositeSignal2.CompositeSignal2.transform">
+<code class="sig-name descname"><span class="pre">transform</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="headerlink" href="#signals.CompositeSignal.CompositeSignal2.CompositeSignal2.transform" title="永久链接至目标">¶</a></dt>
+<dd><p>生成信号, 1表示做多, -1表示做空,
+:returns: <strong>signal_df</strong> – 信号DataFrame, index为交易时间, columns为品种代码, data为信号值
+:rtype: DataFrame</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-signals.CompositeSignal.base">
+<span id="signals-compositesignal-base-module"></span><h2>signals.CompositeSignal.base module<a class="headerlink" href="#module-signals.CompositeSignal.base" title="永久链接至标题">¶</a></h2>
+<dl class="py class">
+<dt id="signals.CompositeSignal.base.BaseCompositeSignal">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">signals.CompositeSignal.base.</span></code><code class="sig-name descname"><span class="pre">BaseCompositeSignal</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#signals.CompositeSignal.base.BaseCompositeSignal" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="signals.html#signals.base.BaseSignal" title="signals.base.BaseSignal"><code class="xref py py-class docutils literal notranslate"><span class="pre">signals.base.BaseSignal</span></code></a></p>
+<p>复合信号基类</p>
+<dl class="py method">
+<dt id="signals.CompositeSignal.base.BaseCompositeSignal.transform">
+<code class="sig-name descname"><span class="pre">transform</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="headerlink" href="#signals.CompositeSignal.base.BaseCompositeSignal.transform" title="永久链接至目标">¶</a></dt>
+<dd><p>根据因子值和商品池生成信号</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-signals.CompositeSignal">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-signals.CompositeSignal" title="永久链接至标题">¶</a></h2>
+<p>复合信号生成器</p>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Commodity Futures Factor Backtesting Framework</a></h1>
+
+
+
+
+
+
+
+
+<h3>导航</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">快速搜索</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="转向" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Luo Feng.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/signals.CompositeSignal.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,215 @@
+
+<!DOCTYPE html>
+
+<html lang="zh_cn">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
+    <title>commodity_pool.DynamicPool package &#8212; Commodity Futures Factor Backtesting Framework 1.0 文档</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/translations.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="commodity-pool-dynamicpool-package">
+<h1>commodity_pool.DynamicPool package<a class="headerlink" href="#commodity-pool-dynamicpool-package" title="永久链接至标题">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="永久链接至标题">¶</a></h2>
+</section>
+<section id="module-commodity_pool.DynamicPool.DynamicPool1">
+<span id="commodity-pool-dynamicpool-dynamicpool1-module"></span><h2>commodity_pool.DynamicPool.DynamicPool1 module<a class="headerlink" href="#module-commodity_pool.DynamicPool.DynamicPool1" title="永久链接至标题">¶</a></h2>
+<dl class="py class">
+<dt id="commodity_pool.DynamicPool.DynamicPool1.DynamicPool1">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">commodity_pool.DynamicPool.DynamicPool1.</span></code><code class="sig-name descname"><span class="pre">DynamicPool1</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">LimitedDays</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">60</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">60</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#commodity_pool.DynamicPool.DynamicPool1.DynamicPool1" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="commodity_pool.html#commodity_pool.base.BaseCommodityPool" title="commodity_pool.base.BaseCommodityPool"><code class="xref py py-class docutils literal notranslate"><span class="pre">commodity_pool.base.BaseCommodityPool</span></code></a></p>
+<dl class="py method">
+<dt id="commodity_pool.DynamicPool.DynamicPool1.DynamicPool1.compute_commodity_pool">
+<code class="sig-name descname"><span class="pre">compute_commodity_pool</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="headerlink" href="#commodity_pool.DynamicPool.DynamicPool1.DynamicPool1.compute_commodity_pool" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-commodity_pool.DynamicPool.DynamicPool2">
+<span id="commodity-pool-dynamicpool-dynamicpool2-module"></span><h2>commodity_pool.DynamicPool.DynamicPool2 module<a class="headerlink" href="#module-commodity_pool.DynamicPool.DynamicPool2" title="永久链接至标题">¶</a></h2>
+<dl class="py class">
+<dt id="commodity_pool.DynamicPool.DynamicPool2.DynamicPool2">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">commodity_pool.DynamicPool.DynamicPool2.</span></code><code class="sig-name descname"><span class="pre">DynamicPool2</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">q</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.25</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">126</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#commodity_pool.DynamicPool.DynamicPool2.DynamicPool2" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="commodity_pool.html#commodity_pool.base.BaseCommodityPool" title="commodity_pool.base.BaseCommodityPool"><code class="xref py py-class docutils literal notranslate"><span class="pre">commodity_pool.base.BaseCommodityPool</span></code></a></p>
+<dl class="py method">
+<dt id="commodity_pool.DynamicPool.DynamicPool2.DynamicPool2.compute_commodity_pool">
+<code class="sig-name descname"><span class="pre">compute_commodity_pool</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="headerlink" href="#commodity_pool.DynamicPool.DynamicPool2.DynamicPool2.compute_commodity_pool" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-commodity_pool.DynamicPool.DynamicPool3">
+<span id="commodity-pool-dynamicpool-dynamicpool3-module"></span><h2>commodity_pool.DynamicPool.DynamicPool3 module<a class="headerlink" href="#module-commodity_pool.DynamicPool.DynamicPool3" title="永久链接至标题">¶</a></h2>
+<dl class="py class">
+<dt id="commodity_pool.DynamicPool.DynamicPool3.DynamicPool3">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">commodity_pool.DynamicPool.DynamicPool3.</span></code><code class="sig-name descname"><span class="pre">DynamicPool3</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">q</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.25</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">126</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#commodity_pool.DynamicPool.DynamicPool3.DynamicPool3" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="commodity_pool.html#commodity_pool.base.BaseCommodityPool" title="commodity_pool.base.BaseCommodityPool"><code class="xref py py-class docutils literal notranslate"><span class="pre">commodity_pool.base.BaseCommodityPool</span></code></a></p>
+<p>动态商品池3</p>
+<p>计算每个品种每日持仓量(当日品种各合约的持仓量之和）的滚动window日平均，将大于q分位数的品种纳入商品池</p>
+<dl class="py attribute">
+<dt id="commodity_pool.DynamicPool.DynamicPool3.DynamicPool3.q">
+<code class="sig-name descname"><span class="pre">q</span></code><a class="headerlink" href="#commodity_pool.DynamicPool.DynamicPool3.DynamicPool3.q" title="永久链接至目标">¶</a></dt>
+<dd><p>分位数</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float, default 0.25</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="commodity_pool.DynamicPool.DynamicPool3.DynamicPool3.window">
+<code class="sig-name descname"><span class="pre">window</span></code><a class="headerlink" href="#commodity_pool.DynamicPool.DynamicPool3.DynamicPool3.window" title="永久链接至目标">¶</a></dt>
+<dd><p>滚动窗口</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int, default 126</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="commodity_pool.DynamicPool.DynamicPool3.DynamicPool3.compute_commodity_pool">
+<code class="sig-name descname"><span class="pre">compute_commodity_pool</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="headerlink" href="#commodity_pool.DynamicPool.DynamicPool3.DynamicPool3.compute_commodity_pool" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-commodity_pool.DynamicPool.DynamicPool4">
+<span id="commodity-pool-dynamicpool-dynamicpool4-module"></span><h2>commodity_pool.DynamicPool.DynamicPool4 module<a class="headerlink" href="#module-commodity_pool.DynamicPool.DynamicPool4" title="永久链接至标题">¶</a></h2>
+<dl class="py class">
+<dt id="commodity_pool.DynamicPool.DynamicPool4.DynamicPool4">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">commodity_pool.DynamicPool.DynamicPool4.</span></code><code class="sig-name descname"><span class="pre">DynamicPool4</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">contract</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'main'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">price</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'close'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rebalance_num</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">60</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.4</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#commodity_pool.DynamicPool.DynamicPool4.DynamicPool4" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="commodity_pool.html#commodity_pool.base.BaseCommodityPool" title="commodity_pool.base.BaseCommodityPool"><code class="xref py py-class docutils literal notranslate"><span class="pre">commodity_pool.base.BaseCommodityPool</span></code></a></p>
+<p>动态商品池4</p>
+<p>1.计算各品种主力合约过去60天平均成交金额的时间序列
+2.在建仓日, 计算各合约成交金额的40分位点, 以此为筛选标准
+3.在建仓日, 剔除掉平均成交金额小于40分位数的合约</p>
+<dl class="py method">
+<dt id="commodity_pool.DynamicPool.DynamicPool4.DynamicPool4.compute_commodity_pool">
+<code class="sig-name descname"><span class="pre">compute_commodity_pool</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="headerlink" href="#commodity_pool.DynamicPool.DynamicPool4.DynamicPool4.compute_commodity_pool" title="永久链接至目标">¶</a></dt>
+<dd><p>计算商品池</p>
+<dl class="field-list simple">
+<dt class="field-odd">返回</dt>
+<dd class="field-odd"><p><strong>commodity_pool_value</strong> – 商品池DataFrame</p>
+</dd>
+<dt class="field-even">返回类型</dt>
+<dd class="field-even"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-commodity_pool.DynamicPool.DynamicPool5">
+<span id="commodity-pool-dynamicpool-dynamicpool5-module"></span><h2>commodity_pool.DynamicPool.DynamicPool5 module<a class="headerlink" href="#module-commodity_pool.DynamicPool.DynamicPool5" title="永久链接至标题">¶</a></h2>
+<dl class="py class">
+<dt id="commodity_pool.DynamicPool.DynamicPool5.DynamicPool5">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">commodity_pool.DynamicPool.DynamicPool5.</span></code><code class="sig-name descname"><span class="pre">DynamicPool5</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">contract</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'main'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">price</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'close'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rebalance_num</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">60</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.4</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#commodity_pool.DynamicPool.DynamicPool5.DynamicPool5" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="commodity_pool.html#commodity_pool.base.BaseCommodityPool" title="commodity_pool.base.BaseCommodityPool"><code class="xref py py-class docutils literal notranslate"><span class="pre">commodity_pool.base.BaseCommodityPool</span></code></a></p>
+<dl class="py method">
+<dt id="commodity_pool.DynamicPool.DynamicPool5.DynamicPool5.compute_commodity_pool">
+<code class="sig-name descname"><span class="pre">compute_commodity_pool</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="headerlink" href="#commodity_pool.DynamicPool.DynamicPool5.DynamicPool5.compute_commodity_pool" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-commodity_pool.DynamicPool">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-commodity_pool.DynamicPool" title="永久链接至标题">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Commodity Futures Factor Backtesting Framework</a></h1>
+
+
+
+
+
+
+
+
+<h3>导航</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">快速搜索</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="转向" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Luo Feng.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/commodity_pool.DynamicPool.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

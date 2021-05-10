@@ -1,0 +1,185 @@
+
+<!DOCTYPE html>
+
+<html lang="zh_cn">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
+    <title>weight package &#8212; Commodity Futures Factor Backtesting Framework 1.0 文档</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/translations.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="weight-package">
+<h1>weight package<a class="headerlink" href="#weight-package" title="永久链接至标题">¶</a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="永久链接至标题">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="weight.EqualWeight.html">weight.EqualWeight package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="weight.EqualWeight.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="weight.EqualWeight.html#module-weight.EqualWeight.NoRiskNeutralEqualWeight">weight.EqualWeight.NoRiskNeutralEqualWeight module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="weight.EqualWeight.html#module-weight.EqualWeight.RiskNeutralEqualWeight">weight.EqualWeight.RiskNeutralEqualWeight module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="weight.EqualWeight.html#module-weight.EqualWeight">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="weight.GroupWeight.html">weight.GroupWeight package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="weight.GroupWeight.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="weight.GroupWeight.html#module-weight.GroupWeight.GroupEqualWeight">weight.GroupWeight.GroupEqualWeight module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="weight.GroupWeight.html#module-weight.GroupWeight.base">weight.GroupWeight.base module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="weight.GroupWeight.html#module-weight.GroupWeight">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="weight.TimeSeriesWeight.html">weight.TimeSeriesWeight package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="weight.TimeSeriesWeight.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="weight.TimeSeriesWeight.html#module-weight.TimeSeriesWeight.TimeSeriesEqualWeight1">weight.TimeSeriesWeight.TimeSeriesEqualWeight1 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="weight.TimeSeriesWeight.html#module-weight.TimeSeriesWeight">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="weight.VolWeight.html">weight.VolWeight package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="weight.VolWeight.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="weight.VolWeight.html#module-weight.VolWeight.base">weight.VolWeight.base module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="weight.VolWeight.html#module-weight.VolWeight">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="永久链接至标题">¶</a></h2>
+</section>
+<section id="module-weight.base">
+<span id="weight-base-module"></span><h2>weight.base module<a class="headerlink" href="#module-weight.base" title="永久链接至标题">¶</a></h2>
+<dl class="py class">
+<dt id="weight.base.BaseWeight">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">weight.base.</span></code><code class="sig-name descname"><span class="pre">BaseWeight</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weight.base.BaseWeight" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="bases.html#bases.base.BaseClass" title="bases.base.BaseClass"><code class="xref py py-class docutils literal notranslate"><span class="pre">bases.base.BaseClass</span></code></a></p>
+<dl class="py method">
+<dt id="weight.base.BaseWeight.get_string">
+<code class="sig-name descname"><span class="pre">get_string</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">str</span><a class="headerlink" href="#weight.base.BaseWeight.get_string" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="weight.base.BaseWeight.get_weight">
+<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">get_weight</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="headerlink" href="#weight.base.BaseWeight.get_weight" title="永久链接至目标">¶</a></dt>
+<dd><p>获取权重
+:returns:
+:rtype: 权重DataFrame</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="weight.base.BaseWeight.set_signal">
+<code class="sig-name descname"><span class="pre">set_signal</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal_df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#weight.base.BaseWeight.set_signal" title="永久链接至目标">¶</a></dt>
+<dd><p>设置信号DataFrame</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><p><strong>signal_df</strong> (<em>DataFrame</em>) – 信号DataFrame, index为交易时间, columns为品种代码, data为信号, 做多为1, 做空为-1,空仓为0</p>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-weight">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-weight" title="永久链接至标题">¶</a></h2>
+<p>信号转化为权重的模块</p>
+<p>EqualWeight: 等权重
+GroupEqualWeight: 分组等权重
+NoRiskNeutralEqualWeight: 不dollar neutral的等权重
+RiskNeutralEqualWeight: 不dollar neutral的等权重</p>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Commodity Futures Factor Backtesting Framework</a></h1>
+
+
+
+
+
+
+
+
+<h3>导航</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">快速搜索</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="转向" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Luo Feng.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/weight.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

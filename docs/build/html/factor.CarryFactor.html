@@ -1,0 +1,714 @@
+
+<!DOCTYPE html>
+
+<html lang="zh_cn">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
+    <title>factor.CarryFactor package &#8212; Commodity Futures Factor Backtesting Framework 1.0 文档</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/translations.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="factor-carryfactor-package">
+<h1>factor.CarryFactor package<a class="headerlink" href="#factor-carryfactor-package" title="永久链接至标题">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="永久链接至标题">¶</a></h2>
+</section>
+<section id="module-factor.CarryFactor.FarNearFactor">
+<span id="factor-carryfactor-farnearfactor-module"></span><h2>factor.CarryFactor.FarNearFactor module<a class="headerlink" href="#module-factor.CarryFactor.FarNearFactor" title="永久链接至标题">¶</a></h2>
+<dl class="py class">
+<dt id="factor.CarryFactor.FarNearFactor.FarNearFactor">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">factor.CarryFactor.FarNearFactor.</span></code><code class="sig-name descname"><span class="pre">FarNearFactor</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">price</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'close'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#factor.CarryFactor.FarNearFactor.FarNearFactor" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="#factor.CarryFactor.base.BaseCarryFactor" title="factor.CarryFactor.base.BaseCarryFactor"><code class="xref py py-class docutils literal notranslate"><span class="pre">factor.CarryFactor.base.BaseCarryFactor</span></code></a></p>
+<p>利用近月合约和次近月合约计算的期限结构因子</p>
+<p>合约: 近月合约和次近月，若合约只有一个，则因子值为缺失值</p>
+<p>时间差: 日历日之差</p>
+<p>计算方法: (近月合约价格-次近月合约价格)/(次近月合约价格*时间差)</p>
+<dl class="py attribute">
+<dt id="factor.CarryFactor.FarNearFactor.FarNearFactor.price">
+<code class="sig-name descname"><span class="pre">price</span></code><a class="headerlink" href="#factor.CarryFactor.FarNearFactor.FarNearFactor.price" title="永久链接至目标">¶</a></dt>
+<dd><p>用于代表合约价格的字段, close或settlement</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="factor.CarryFactor.FarNearFactor.FarNearFactor.window">
+<code class="sig-name descname"><span class="pre">window</span></code><a class="headerlink" href="#factor.CarryFactor.FarNearFactor.FarNearFactor.window" title="永久链接至目标">¶</a></dt>
+<dd><p>因子平滑参数，所有因子都具有</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="admonition seealso">
+<p class="admonition-title">参见</p>
+<p><code class="xref py py-obj docutils literal notranslate"><span class="pre">factor.CarryFactor.bases.BaseFactor</span></code></p>
+</div>
+<dl class="py method">
+<dt id="factor.CarryFactor.FarNearFactor.FarNearFactor.compute_factor">
+<code class="sig-name descname"><span class="pre">compute_factor</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="headerlink" href="#factor.CarryFactor.FarNearFactor.FarNearFactor.compute_factor" title="永久链接至目标">¶</a></dt>
+<dd><p>计算因子，通过对compute_single_factor实现</p>
+<dl class="field-list simple">
+<dt class="field-odd">返回</dt>
+<dd class="field-odd"><p><strong>因子值</strong> – index为datetime, columns为underlying_symbol, data为factor</p>
+</dd>
+<dt class="field-even">返回类型</dt>
+<dd class="field-even"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="factor.CarryFactor.FarNearFactor.FarNearFactor.compute_single_factor">
+<code class="sig-name descname"><span class="pre">compute_single_factor</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbol</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="headerlink" href="#factor.CarryFactor.FarNearFactor.FarNearFactor.compute_single_factor" title="永久链接至目标">¶</a></dt>
+<dd><p>计算单品种的因子值</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><p><strong>symbol</strong> (<em>str</em>) – 品种代码</p>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p><strong>因子值</strong> – 默认的index, 三列, datetime, underlying_symbol(均为symbol), factor</p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-factor.CarryFactor.MainNearFactor1">
+<span id="factor-carryfactor-mainnearfactor1-module"></span><h2>factor.CarryFactor.MainNearFactor1 module<a class="headerlink" href="#module-factor.CarryFactor.MainNearFactor1" title="永久链接至标题">¶</a></h2>
+<dl class="py class">
+<dt id="factor.CarryFactor.MainNearFactor1.MainNearFactor1">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">factor.CarryFactor.MainNearFactor1.</span></code><code class="sig-name descname"><span class="pre">MainNearFactor1</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">price</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'close'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#factor.CarryFactor.MainNearFactor1.MainNearFactor1" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="#factor.CarryFactor.base.BaseCarryFactor" title="factor.CarryFactor.base.BaseCarryFactor"><code class="xref py py-class docutils literal notranslate"><span class="pre">factor.CarryFactor.base.BaseCarryFactor</span></code></a></p>
+<p>利用主力合约和去除主力合约后最近合约计算的期限结构因子</p>
+<p>合约: 主力合约和去除主力合约后最近合约，两者中近的合约定义为近月合约，远的合约定义为远月合约. 若合约只有一个，则因子值为缺失值</p>
+<p>时间差: 日历日之差</p>
+<p>计算方法: (近月合约价格-远月合约价格)/(远月合约价格*时间差)</p>
+<dl class="py attribute">
+<dt id="factor.CarryFactor.MainNearFactor1.MainNearFactor1.price">
+<code class="sig-name descname"><span class="pre">price</span></code><a class="headerlink" href="#factor.CarryFactor.MainNearFactor1.MainNearFactor1.price" title="永久链接至目标">¶</a></dt>
+<dd><p>用于代表合约价格的字段, close或settlement</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="factor.CarryFactor.MainNearFactor1.MainNearFactor1.window">
+<code class="sig-name descname"><span class="pre">window</span></code><a class="headerlink" href="#factor.CarryFactor.MainNearFactor1.MainNearFactor1.window" title="永久链接至目标">¶</a></dt>
+<dd><p>因子平滑参数，所有因子都具有</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="admonition seealso">
+<p class="admonition-title">参见</p>
+<p><code class="xref py py-obj docutils literal notranslate"><span class="pre">factor.CarryFactor.bases.BaseFactor</span></code></p>
+</div>
+<dl class="py method">
+<dt id="factor.CarryFactor.MainNearFactor1.MainNearFactor1.compute_factor">
+<code class="sig-name descname"><span class="pre">compute_factor</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="headerlink" href="#factor.CarryFactor.MainNearFactor1.MainNearFactor1.compute_factor" title="永久链接至目标">¶</a></dt>
+<dd><p>计算因子，通过对compute_single_factor实现</p>
+<dl class="field-list simple">
+<dt class="field-odd">返回</dt>
+<dd class="field-odd"><p><strong>因子值</strong> – index为datetime, columns为underlying_symbol, data为factor</p>
+</dd>
+<dt class="field-even">返回类型</dt>
+<dd class="field-even"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="factor.CarryFactor.MainNearFactor1.MainNearFactor1.compute_single_factor">
+<code class="sig-name descname"><span class="pre">compute_single_factor</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbol</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="headerlink" href="#factor.CarryFactor.MainNearFactor1.MainNearFactor1.compute_single_factor" title="永久链接至目标">¶</a></dt>
+<dd><p>计算单品种的因子值</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><p><strong>symbol</strong> (<em>str</em>) – 品种代码</p>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p><strong>因子值</strong> – 默认的index, 三列, datetime, underlying_symbol(均为symbol), factor</p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-factor.CarryFactor.MainNearFactor2">
+<span id="factor-carryfactor-mainnearfactor2-module"></span><h2>factor.CarryFactor.MainNearFactor2 module<a class="headerlink" href="#module-factor.CarryFactor.MainNearFactor2" title="永久链接至标题">¶</a></h2>
+<dl class="py class">
+<dt id="factor.CarryFactor.MainNearFactor2.MainNearFactor2">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">factor.CarryFactor.MainNearFactor2.</span></code><code class="sig-name descname"><span class="pre">MainNearFactor2</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">price</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'close'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#factor.CarryFactor.MainNearFactor2.MainNearFactor2" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="factor.html#factor.base.BaseFactor" title="factor.base.BaseFactor"><code class="xref py py-class docutils literal notranslate"><span class="pre">factor.base.BaseFactor</span></code></a></p>
+<p>利用主力合约和去除主力合约后最近合约计算的期限结构因子</p>
+<p>合约: 主力合约和去除主力合约后最近合约，两者中近的合约定义为近月合约，远的合约定义为远月合约. 若合约只有一个，则因子值为缺失值</p>
+<p>时间差: 两个月份差的日历天数</p>
+<p>计算方法: (近月合约价格-远月合约价格)/(远月合约价格*时间差)</p>
+<dl class="py attribute">
+<dt id="factor.CarryFactor.MainNearFactor2.MainNearFactor2.price">
+<code class="sig-name descname"><span class="pre">price</span></code><a class="headerlink" href="#factor.CarryFactor.MainNearFactor2.MainNearFactor2.price" title="永久链接至目标">¶</a></dt>
+<dd><p>用于代表合约价格的字段, close或settlement</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="factor.CarryFactor.MainNearFactor2.MainNearFactor2.window">
+<code class="sig-name descname"><span class="pre">window</span></code><a class="headerlink" href="#factor.CarryFactor.MainNearFactor2.MainNearFactor2.window" title="永久链接至目标">¶</a></dt>
+<dd><p>因子平滑参数，所有因子都具有</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="admonition seealso">
+<p class="admonition-title">参见</p>
+<p><code class="xref py py-obj docutils literal notranslate"><span class="pre">factor.CarryFactor.bases.BaseFactor</span></code></p>
+</div>
+<dl class="py method">
+<dt id="factor.CarryFactor.MainNearFactor2.MainNearFactor2.compute_factor">
+<code class="sig-name descname"><span class="pre">compute_factor</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="headerlink" href="#factor.CarryFactor.MainNearFactor2.MainNearFactor2.compute_factor" title="永久链接至目标">¶</a></dt>
+<dd><p>计算因子，通过对compute_single_factor实现</p>
+<dl class="field-list simple">
+<dt class="field-odd">返回</dt>
+<dd class="field-odd"><p><strong>因子值</strong> – index为datetime, columns为underlying_symbol, data为factor</p>
+</dd>
+<dt class="field-even">返回类型</dt>
+<dd class="field-even"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="factor.CarryFactor.MainNearFactor2.MainNearFactor2.compute_single_factor">
+<code class="sig-name descname"><span class="pre">compute_single_factor</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbol</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="headerlink" href="#factor.CarryFactor.MainNearFactor2.MainNearFactor2.compute_single_factor" title="永久链接至目标">¶</a></dt>
+<dd><p>计算单品种的因子值</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><p><strong>symbol</strong> (<em>str</em>) – 品种代码</p>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p><strong>因子值</strong> – 默认的index, 三列, datetime, underlying_symbol(均为symbol), factor</p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-factor.CarryFactor.MainNearFactor3">
+<span id="factor-carryfactor-mainnearfactor3-module"></span><h2>factor.CarryFactor.MainNearFactor3 module<a class="headerlink" href="#module-factor.CarryFactor.MainNearFactor3" title="永久链接至标题">¶</a></h2>
+<dl class="py class">
+<dt id="factor.CarryFactor.MainNearFactor3.MainNearFactor3">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">factor.CarryFactor.MainNearFactor3.</span></code><code class="sig-name descname"><span class="pre">MainNearFactor3</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">price</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'close'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#factor.CarryFactor.MainNearFactor3.MainNearFactor3" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="#factor.CarryFactor.base.BaseCarryFactor" title="factor.CarryFactor.base.BaseCarryFactor"><code class="xref py py-class docutils literal notranslate"><span class="pre">factor.CarryFactor.base.BaseCarryFactor</span></code></a></p>
+<p>利用主力合约和去除主力合约后最近合约计算的期限结构因子</p>
+<p>合约: 主力合约和去除主力合约后最近合约，两者中近的合约定义为近月合约，远的合约定义为远月合约. 若合约只有一个，则因子值为缺失值</p>
+<p>时间差: 月份差</p>
+<p>计算方法: (近月合约价格-远月合约价格)/(远月合约价格*时间差)</p>
+<dl class="py attribute">
+<dt id="factor.CarryFactor.MainNearFactor3.MainNearFactor3.price">
+<code class="sig-name descname"><span class="pre">price</span></code><a class="headerlink" href="#factor.CarryFactor.MainNearFactor3.MainNearFactor3.price" title="永久链接至目标">¶</a></dt>
+<dd><p>用于代表合约价格的字段, close或settlement</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="factor.CarryFactor.MainNearFactor3.MainNearFactor3.window">
+<code class="sig-name descname"><span class="pre">window</span></code><a class="headerlink" href="#factor.CarryFactor.MainNearFactor3.MainNearFactor3.window" title="永久链接至目标">¶</a></dt>
+<dd><p>因子平滑参数，所有因子都具有</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="admonition seealso">
+<p class="admonition-title">参见</p>
+<p><code class="xref py py-obj docutils literal notranslate"><span class="pre">factor.CarryFactor.bases.BaseFactor</span></code></p>
+</div>
+<dl class="py method">
+<dt id="factor.CarryFactor.MainNearFactor3.MainNearFactor3.compute_factor">
+<code class="sig-name descname"><span class="pre">compute_factor</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="headerlink" href="#factor.CarryFactor.MainNearFactor3.MainNearFactor3.compute_factor" title="永久链接至目标">¶</a></dt>
+<dd><p>计算因子，通过对compute_single_factor实现</p>
+<dl class="field-list simple">
+<dt class="field-odd">返回</dt>
+<dd class="field-odd"><p><strong>因子值</strong> – index为datetime, columns为underlying_symbol, data为factor</p>
+</dd>
+<dt class="field-even">返回类型</dt>
+<dd class="field-even"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="factor.CarryFactor.MainNearFactor3.MainNearFactor3.compute_single_factor">
+<code class="sig-name descname"><span class="pre">compute_single_factor</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbol</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="headerlink" href="#factor.CarryFactor.MainNearFactor3.MainNearFactor3.compute_single_factor" title="永久链接至目标">¶</a></dt>
+<dd><p>计算单品种的因子值</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><p><strong>symbol</strong> (<em>str</em>) – 品种代码</p>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p><strong>因子值</strong> – 默认的index, 三列, datetime, underlying_symbol(均为symbol), factor</p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-factor.CarryFactor.MainNearFactor4">
+<span id="factor-carryfactor-mainnearfactor4-module"></span><h2>factor.CarryFactor.MainNearFactor4 module<a class="headerlink" href="#module-factor.CarryFactor.MainNearFactor4" title="永久链接至标题">¶</a></h2>
+<dl class="py class">
+<dt id="factor.CarryFactor.MainNearFactor4.MainNearFactor4">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">factor.CarryFactor.MainNearFactor4.</span></code><code class="sig-name descname"><span class="pre">MainNearFactor4</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">price</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'close'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#factor.CarryFactor.MainNearFactor4.MainNearFactor4" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="#factor.CarryFactor.base.BaseCarryFactor" title="factor.CarryFactor.base.BaseCarryFactor"><code class="xref py py-class docutils literal notranslate"><span class="pre">factor.CarryFactor.base.BaseCarryFactor</span></code></a></p>
+<p>利用主力合约和去除主力合约后最近合约计算的期限结构因子</p>
+<p>合约: 主力合约和去除主力合约后最近合约，两者中近的合约定义为近月合约，远的合约定义为远月合约. 若合约只有一个，则因子值为缺失值</p>
+<p>时间差: 两个到期日的日历日之差</p>
+<p>计算方法: ln(远月合约价格/近月合约价格)/时间差</p>
+<dl class="py attribute">
+<dt id="factor.CarryFactor.MainNearFactor4.MainNearFactor4.price">
+<code class="sig-name descname"><span class="pre">price</span></code><a class="headerlink" href="#factor.CarryFactor.MainNearFactor4.MainNearFactor4.price" title="永久链接至目标">¶</a></dt>
+<dd><p>用于代表合约价格的字段, close或settlement</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="factor.CarryFactor.MainNearFactor4.MainNearFactor4.window">
+<code class="sig-name descname"><span class="pre">window</span></code><a class="headerlink" href="#factor.CarryFactor.MainNearFactor4.MainNearFactor4.window" title="永久链接至目标">¶</a></dt>
+<dd><p>因子平滑参数，所有因子都具有</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="admonition seealso">
+<p class="admonition-title">参见</p>
+<p><code class="xref py py-obj docutils literal notranslate"><span class="pre">factor.CarryFactor.bases.BaseFactor</span></code></p>
+</div>
+<dl class="py method">
+<dt id="factor.CarryFactor.MainNearFactor4.MainNearFactor4.compute_factor">
+<code class="sig-name descname"><span class="pre">compute_factor</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="headerlink" href="#factor.CarryFactor.MainNearFactor4.MainNearFactor4.compute_factor" title="永久链接至目标">¶</a></dt>
+<dd><p>计算因子，通过对compute_single_factor实现</p>
+<dl class="field-list simple">
+<dt class="field-odd">返回</dt>
+<dd class="field-odd"><p><strong>因子值</strong> – index为datetime, columns为underlying_symbol, data为factor</p>
+</dd>
+<dt class="field-even">返回类型</dt>
+<dd class="field-even"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="factor.CarryFactor.MainNearFactor4.MainNearFactor4.compute_single_factor">
+<code class="sig-name descname"><span class="pre">compute_single_factor</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbol</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="headerlink" href="#factor.CarryFactor.MainNearFactor4.MainNearFactor4.compute_single_factor" title="永久链接至目标">¶</a></dt>
+<dd><p>计算单品种的因子值</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><p><strong>symbol</strong> (<em>str</em>) – 品种代码</p>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p><strong>因子值</strong> – 默认的index, 三列, datetime, underlying_symbol(均为symbol), factor</p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-factor.CarryFactor.MainSubFactor1">
+<span id="factor-carryfactor-mainsubfactor1-module"></span><h2>factor.CarryFactor.MainSubFactor1 module<a class="headerlink" href="#module-factor.CarryFactor.MainSubFactor1" title="永久链接至标题">¶</a></h2>
+<dl class="py class">
+<dt id="factor.CarryFactor.MainSubFactor1.MainSubFactor1">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">factor.CarryFactor.MainSubFactor1.</span></code><code class="sig-name descname"><span class="pre">MainSubFactor1</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">price</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'close'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#factor.CarryFactor.MainSubFactor1.MainSubFactor1" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="#factor.CarryFactor.base.BaseCarryFactor" title="factor.CarryFactor.base.BaseCarryFactor"><code class="xref py py-class docutils literal notranslate"><span class="pre">factor.CarryFactor.base.BaseCarryFactor</span></code></a></p>
+<p>利用主力和次主力合约计算得到的期限结构因子</p>
+<p>合约：主力合约和次主力合约(根据成交量)，两者中近的合约定义为近月合约，远的合约定义为远月合约. 若合约只有一个，则因子值为缺失值</p>
+<p>时间差：日历日之差</p>
+<p>计算方法: (近月合约价格-远月合约价格)/(远月合约价格*时间差)</p>
+<dl class="py attribute">
+<dt id="factor.CarryFactor.MainSubFactor1.MainSubFactor1.price">
+<code class="sig-name descname"><span class="pre">price</span></code><a class="headerlink" href="#factor.CarryFactor.MainSubFactor1.MainSubFactor1.price" title="永久链接至目标">¶</a></dt>
+<dd><p>用于代表合约价格的字段, close或settlement</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="factor.CarryFactor.MainSubFactor1.MainSubFactor1.window">
+<code class="sig-name descname"><span class="pre">window</span></code><a class="headerlink" href="#factor.CarryFactor.MainSubFactor1.MainSubFactor1.window" title="永久链接至目标">¶</a></dt>
+<dd><p>因子平滑参数，所有因子都具有</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="admonition seealso">
+<p class="admonition-title">参见</p>
+<p><code class="xref py py-obj docutils literal notranslate"><span class="pre">factor.CarryFactor.bases.BaseFactor</span></code></p>
+</div>
+<dl class="py method">
+<dt id="factor.CarryFactor.MainSubFactor1.MainSubFactor1.compute_factor">
+<code class="sig-name descname"><span class="pre">compute_factor</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="headerlink" href="#factor.CarryFactor.MainSubFactor1.MainSubFactor1.compute_factor" title="永久链接至目标">¶</a></dt>
+<dd><p>计算因子，通过对compute_single_factor实现</p>
+<dl class="field-list simple">
+<dt class="field-odd">返回</dt>
+<dd class="field-odd"><p><strong>因子值</strong> – index为datetime, columns为underlying_symbol, data为factor</p>
+</dd>
+<dt class="field-even">返回类型</dt>
+<dd class="field-even"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="factor.CarryFactor.MainSubFactor1.MainSubFactor1.compute_single_factor">
+<code class="sig-name descname"><span class="pre">compute_single_factor</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbol</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="headerlink" href="#factor.CarryFactor.MainSubFactor1.MainSubFactor1.compute_single_factor" title="永久链接至目标">¶</a></dt>
+<dd><p>计算单品种的因子值</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><p><strong>symbol</strong> (<em>str</em>) – 品种代码</p>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p><strong>因子值</strong> – 默认的index, 三列, datetime, underlying_symbol(均为symbol), factor</p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-factor.CarryFactor.MainSubFactor2">
+<span id="factor-carryfactor-mainsubfactor2-module"></span><h2>factor.CarryFactor.MainSubFactor2 module<a class="headerlink" href="#module-factor.CarryFactor.MainSubFactor2" title="永久链接至标题">¶</a></h2>
+<dl class="py class">
+<dt id="factor.CarryFactor.MainSubFactor2.MainSubFactor2">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">factor.CarryFactor.MainSubFactor2.</span></code><code class="sig-name descname"><span class="pre">MainSubFactor2</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">price</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'close'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#factor.CarryFactor.MainSubFactor2.MainSubFactor2" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="#factor.CarryFactor.base.BaseCarryFactor" title="factor.CarryFactor.base.BaseCarryFactor"><code class="xref py py-class docutils literal notranslate"><span class="pre">factor.CarryFactor.base.BaseCarryFactor</span></code></a></p>
+<p>利用主力和次主力合约计算得到的期限结构因子</p>
+<p>合约：主力合约和次主力合约(根据open_interest), 以次主力合约为近月合约，以主力合约为远月合约</p>
+<p>时间差：日历日之差</p>
+<p>计算方法: (近月合约价格-远月合约价格)/(远月合约价格*时间差)</p>
+<dl class="py attribute">
+<dt id="factor.CarryFactor.MainSubFactor2.MainSubFactor2.price">
+<code class="sig-name descname"><span class="pre">price</span></code><a class="headerlink" href="#factor.CarryFactor.MainSubFactor2.MainSubFactor2.price" title="永久链接至目标">¶</a></dt>
+<dd><p>用于代表合约价格的字段, close或settlement</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="factor.CarryFactor.MainSubFactor2.MainSubFactor2.window">
+<code class="sig-name descname"><span class="pre">window</span></code><a class="headerlink" href="#factor.CarryFactor.MainSubFactor2.MainSubFactor2.window" title="永久链接至目标">¶</a></dt>
+<dd><p>因子平滑参数，所有因子都具有</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="admonition seealso">
+<p class="admonition-title">参见</p>
+<p><code class="xref py py-obj docutils literal notranslate"><span class="pre">factor.CarryFactor.bases.BaseFactor</span></code></p>
+</div>
+<dl class="py method">
+<dt id="factor.CarryFactor.MainSubFactor2.MainSubFactor2.compute_factor">
+<code class="sig-name descname"><span class="pre">compute_factor</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="headerlink" href="#factor.CarryFactor.MainSubFactor2.MainSubFactor2.compute_factor" title="永久链接至目标">¶</a></dt>
+<dd><p>计算因子，通过对compute_single_factor实现</p>
+<dl class="field-list simple">
+<dt class="field-odd">返回</dt>
+<dd class="field-odd"><p><strong>因子值</strong> – index为datetime, columns为underlying_symbol, data为factor</p>
+</dd>
+<dt class="field-even">返回类型</dt>
+<dd class="field-even"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="factor.CarryFactor.MainSubFactor2.MainSubFactor2.compute_single_factor">
+<code class="sig-name descname"><span class="pre">compute_single_factor</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbol</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="headerlink" href="#factor.CarryFactor.MainSubFactor2.MainSubFactor2.compute_single_factor" title="永久链接至目标">¶</a></dt>
+<dd><p>计算单品种的因子值</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><p><strong>symbol</strong> (<em>str</em>) – 品种代码</p>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p><strong>因子值</strong> – 默认的index, 三列, datetime, underlying_symbol(均为symbol), factor</p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-factor.CarryFactor.SlopeFactor1">
+<span id="factor-carryfactor-slopefactor1-module"></span><h2>factor.CarryFactor.SlopeFactor1 module<a class="headerlink" href="#module-factor.CarryFactor.SlopeFactor1" title="永久链接至标题">¶</a></h2>
+<dl class="py class">
+<dt id="factor.CarryFactor.SlopeFactor1.SlopeFactor1">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">factor.CarryFactor.SlopeFactor1.</span></code><code class="sig-name descname"><span class="pre">SlopeFactor1</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">price</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'close'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#factor.CarryFactor.SlopeFactor1.SlopeFactor1" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="factor.html#factor.base.BaseFactor" title="factor.base.BaseFactor"><code class="xref py py-class docutils literal notranslate"><span class="pre">factor.base.BaseFactor</span></code></a></p>
+<p>利用斜率计算得到的期限结构因子</p>
+<p>合约: 一个品种所有合约</p>
+<p>因变量y: ln(合约价格)</p>
+<p>自变量x：各合约到期日与近月合约到期日的日历日差（即近月合约为0）</p>
+<p>计算方法: 对每个品种每个交易日所有合约的y,x求线性回归, 得到的斜率即为因子值</p>
+<dl class="py attribute">
+<dt id="factor.CarryFactor.SlopeFactor1.SlopeFactor1.price">
+<code class="sig-name descname"><span class="pre">price</span></code><a class="headerlink" href="#factor.CarryFactor.SlopeFactor1.SlopeFactor1.price" title="永久链接至目标">¶</a></dt>
+<dd><p>用于代表合约价格的字段, close或settlement</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="factor.CarryFactor.SlopeFactor1.SlopeFactor1.window">
+<code class="sig-name descname"><span class="pre">window</span></code><a class="headerlink" href="#factor.CarryFactor.SlopeFactor1.SlopeFactor1.window" title="永久链接至目标">¶</a></dt>
+<dd><p>因子平滑参数，所有因子都具有</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="admonition seealso">
+<p class="admonition-title">参见</p>
+<p><code class="xref py py-obj docutils literal notranslate"><span class="pre">factor.CarryFactor.bases.BaseFactor</span></code></p>
+</div>
+<dl class="py method">
+<dt id="factor.CarryFactor.SlopeFactor1.SlopeFactor1.compute_factor">
+<code class="sig-name descname"><span class="pre">compute_factor</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="headerlink" href="#factor.CarryFactor.SlopeFactor1.SlopeFactor1.compute_factor" title="永久链接至目标">¶</a></dt>
+<dd><p>计算因子，通过对compute_single_factor实现</p>
+<dl class="field-list simple">
+<dt class="field-odd">返回</dt>
+<dd class="field-odd"><p><strong>因子值</strong> – index为datetime, columns为underlying_symbol, data为factor</p>
+</dd>
+<dt class="field-even">返回类型</dt>
+<dd class="field-even"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="factor.CarryFactor.SlopeFactor1.SlopeFactor1.compute_single_factor">
+<code class="sig-name descname"><span class="pre">compute_single_factor</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbol</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="headerlink" href="#factor.CarryFactor.SlopeFactor1.SlopeFactor1.compute_single_factor" title="永久链接至目标">¶</a></dt>
+<dd><p>计算单品种的因子值</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><p><strong>symbol</strong> (<em>str</em>) – 品种代码</p>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p><strong>因子值</strong> – 默认的index, 三列, datetime, underlying_symbol(均为symbol), factor</p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-factor.CarryFactor.base">
+<span id="factor-carryfactor-base-module"></span><h2>factor.CarryFactor.base module<a class="headerlink" href="#module-factor.CarryFactor.base" title="永久链接至标题">¶</a></h2>
+<dl class="py class">
+<dt id="factor.CarryFactor.base.BaseCarryFactor">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">factor.CarryFactor.base.</span></code><code class="sig-name descname"><span class="pre">BaseCarryFactor</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#factor.CarryFactor.base.BaseCarryFactor" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="factor.html#factor.base.BaseFactor" title="factor.base.BaseFactor"><code class="xref py py-class docutils literal notranslate"><span class="pre">factor.base.BaseFactor</span></code></a></p>
+<p>期限结构因子基类</p>
+<div class="admonition seealso">
+<p class="admonition-title">参见</p>
+<p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bases.bases.BaseClass</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">factor.bases.BaseFactor</span></code></p>
+</div>
+<dl class="py method">
+<dt id="factor.CarryFactor.base.BaseCarryFactor.compute_factor">
+<code class="sig-name descname"><span class="pre">compute_factor</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="headerlink" href="#factor.CarryFactor.base.BaseCarryFactor.compute_factor" title="永久链接至目标">¶</a></dt>
+<dd><p>计算因子，通过对compute_single_factor实现</p>
+<dl class="field-list simple">
+<dt class="field-odd">返回</dt>
+<dd class="field-odd"><p><strong>因子值</strong> – index为datetime, columns为underlying_symbol, data为factor</p>
+</dd>
+<dt class="field-even">返回类型</dt>
+<dd class="field-even"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="factor.CarryFactor.base.BaseCarryFactor.compute_single_factor">
+<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">compute_single_factor</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbol</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="headerlink" href="#factor.CarryFactor.base.BaseCarryFactor.compute_single_factor" title="永久链接至目标">¶</a></dt>
+<dd><p>计算单品种的期限结构因子, 需要各期限结构因子重写</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><p><strong>symbol</strong> (<em>str</em>) – 品种代码</p>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p><strong>因子值</strong> – 默认的index, 三列, datetime, underlying_symbol(均为symbol), factor</p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-factor.CarryFactor">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-factor.CarryFactor" title="永久链接至标题">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Commodity Futures Factor Backtesting Framework</a></h1>
+
+
+
+
+
+
+
+
+<h3>导航</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">快速搜索</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="转向" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Luo Feng.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/factor.CarryFactor.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

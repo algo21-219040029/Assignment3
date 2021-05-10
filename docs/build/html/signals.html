@@ -1,0 +1,246 @@
+
+<!DOCTYPE html>
+
+<html lang="zh_cn">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
+    <title>signals package &#8212; Commodity Futures Factor Backtesting Framework 1.0 文档</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/translations.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="signals-package">
+<h1>signals package<a class="headerlink" href="#signals-package" title="永久链接至标题">¶</a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="永久链接至标题">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="signals.CompositeSignal.html">signals.CompositeSignal package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="signals.CompositeSignal.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="signals.CompositeSignal.html#module-signals.CompositeSignal.CompositeSignal1">signals.CompositeSignal.CompositeSignal1 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="signals.CompositeSignal.html#module-signals.CompositeSignal.CompositeSignal2">signals.CompositeSignal.CompositeSignal2 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="signals.CompositeSignal.html#module-signals.CompositeSignal.base">signals.CompositeSignal.base module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="signals.CompositeSignal.html#module-signals.CompositeSignal">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="signals.CrossSectionSignal.html">signals.CrossSectionSignal package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="signals.CrossSectionSignal.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="signals.CrossSectionSignal.html#module-signals.CrossSectionSignal.CrossSectionSignal1">signals.CrossSectionSignal.CrossSectionSignal1 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="signals.CrossSectionSignal.html#module-signals.CrossSectionSignal.base">signals.CrossSectionSignal.base module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="signals.CrossSectionSignal.html#module-signals.CrossSectionSignal">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="signals.GroupSignal.html">signals.GroupSignal package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="signals.GroupSignal.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="signals.GroupSignal.html#module-signals.GroupSignal.GroupLongSignal1">signals.GroupSignal.GroupLongSignal1 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="signals.GroupSignal.html#module-signals.GroupSignal.GroupNLongSignal1">signals.GroupSignal.GroupNLongSignal1 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="signals.GroupSignal.html#module-signals.GroupSignal.GroupPLongSignal1">signals.GroupSignal.GroupPLongSignal1 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="signals.GroupSignal.html#module-signals.GroupSignal.base">signals.GroupSignal.base module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="signals.GroupSignal.html#module-signals.GroupSignal">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="signals.TimeSeriesSignal.html">signals.TimeSeriesSignal package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="signals.TimeSeriesSignal.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="signals.TimeSeriesSignal.html#module-signals.TimeSeriesSignal.TimeSeriesSignal1">signals.TimeSeriesSignal.TimeSeriesSignal1 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="signals.TimeSeriesSignal.html#module-signals.TimeSeriesSignal.base">signals.TimeSeriesSignal.base module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="signals.TimeSeriesSignal.html#module-signals.TimeSeriesSignal">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="永久链接至标题">¶</a></h2>
+</section>
+<section id="module-signals.base">
+<span id="signals-base-module"></span><h2>signals.base module<a class="headerlink" href="#module-signals.base" title="永久链接至标题">¶</a></h2>
+<dl class="py class">
+<dt id="signals.base.BaseSignal">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">signals.base.</span></code><code class="sig-name descname"><span class="pre">BaseSignal</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#signals.base.BaseSignal" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<a class="reference internal" href="bases.html#bases.base.BaseClass" title="bases.base.BaseClass"><code class="xref py py-class docutils literal notranslate"><span class="pre">bases.base.BaseClass</span></code></a></p>
+<p>因子值转化为信号, 做多为1, 做空为-1, 空仓为0</p>
+<dl class="py attribute">
+<dt id="signals.base.BaseSignal.factor_data">
+<code class="sig-name descname"><span class="pre">factor_data</span></code><a class="headerlink" href="#signals.base.BaseSignal.factor_data" title="永久链接至目标">¶</a></dt>
+<dd><p>因子数据, index为交易时间, columns为品种代码, data为因子值</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="signals.base.BaseSignal.commodity_pool">
+<code class="sig-name descname"><span class="pre">commodity_pool</span></code><a class="headerlink" href="#signals.base.BaseSignal.commodity_pool" title="永久链接至目标">¶</a></dt>
+<dd><p>商品池, index为交易时间, columns为品种代码, data为因子值</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="admonition seealso">
+<p class="admonition-title">参见</p>
+<p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bases.bases.BaseClass</span></code></p>
+</div>
+<dl class="py method">
+<dt id="signals.base.BaseSignal.get_groupby_field">
+<code class="sig-name descname"><span class="pre">get_groupby_field</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">field</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="headerlink" href="#signals.base.BaseSignal.get_groupby_field" title="永久链接至目标">¶</a></dt>
+<dd><p>获取以品种为单位的日线行情数据</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>field</strong> (<em>str</em><em>,</em>) – 字段</p></li>
+<li><p><strong>method</strong> (<em>str</em><em>,</em>) – first, last, sum, min, max等</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="signals.base.BaseSignal.get_string">
+<code class="sig-name descname"><span class="pre">get_string</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">str</span><a class="headerlink" href="#signals.base.BaseSignal.get_string" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="signals.base.BaseSignal.set_commodity_pool">
+<code class="sig-name descname"><span class="pre">set_commodity_pool</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">commodity_pool</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#signals.base.BaseSignal.set_commodity_pool" title="永久链接至目标">¶</a></dt>
+<dd><p>设置商品池</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><p><strong>DataFrame</strong> (<em>commodity_poolL</em>) – 商品吃, index为交易时间, columns为品种代码, data为商品池</p>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="signals.base.BaseSignal.set_factor_data">
+<code class="sig-name descname"><span class="pre">set_factor_data</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">factor_data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#signals.base.BaseSignal.set_factor_data" title="永久链接至目标">¶</a></dt>
+<dd><p>设置因子值</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><p><strong>factor_data</strong> (<em>DataFrame</em>) – 因子值, index为交易时间, columns为品种代码, data为因子值</p>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="signals.base.BaseSignal.transform">
+<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">transform</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="headerlink" href="#signals.base.BaseSignal.transform" title="永久链接至目标">¶</a></dt>
+<dd><p>根据因子值和商品池生成信号</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-signals">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-signals" title="永久链接至标题">¶</a></h2>
+<p>交易信号模块：将因子值转化为交易信号的模块, 做多为1, 做空为-1, 空仓为0,</p>
+<p>分组:
+1.CrossSectionSignal: 横截面信号生成器
+2.TimeSeriesSignal: 时间序列信号生成器
+3.CompositeSignal: 复合信号生成器</p>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Commodity Futures Factor Backtesting Framework</a></h1>
+
+
+
+
+
+
+
+
+<h3>导航</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">快速搜索</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="转向" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Luo Feng.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/signals.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,1157 @@
+
+<!DOCTYPE html>
+
+<html lang="zh_cn">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
+    <title>data_manager package &#8212; Commodity Futures Factor Backtesting Framework 1.0 文档</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/translations.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="data-manager-package">
+<h1>data_manager package<a class="headerlink" href="#data-manager-package" title="永久链接至标题">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="永久链接至标题">¶</a></h2>
+</section>
+<section id="module-data_manager.BasicsDataManager">
+<span id="data-manager-basicsdatamanager-module"></span><h2>data_manager.BasicsDataManager module<a class="headerlink" href="#module-data_manager.BasicsDataManager" title="永久链接至标题">¶</a></h2>
+<dl class="py class">
+<dt id="data_manager.BasicsDataManager.BasicsDataManager">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">data_manager.BasicsDataManager.</span></code><code class="sig-name descname"><span class="pre">BasicsDataManager</span></code><a class="headerlink" href="#data_manager.BasicsDataManager.BasicsDataManager" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>基础信息数据管理器</p>
+<p>BasicsDataManager用于提取期货基础数据，包括交易日历、合约基础数据，以及在此基础上衍生的
+品种列表、单一品种的所有列表、单一品种所有合约到期日。</p>
+<dl>
+<dt>data_folder_path: pathlib.Path</dt><dd><p>数据文件文件夹路径。</p>
+</dd>
+<dt>trade_cal: DatetimeIndex</dt><dd><p>交易日历</p>
+</dd>
+<dt>all_instruments: DataFrame</dt><dd><p>期货合约基础信息</p>
+</dd>
+<dt>symbol_list: 列表</dt><dd><p>品种代码列表</p>
+</dd>
+<dt>contract_list_dict: dictionary</dt><dd><p>{品种1:[合约1, 合约2, …}, 品种2:[合约1, 合约2, …]…}
+每个品种的合约列表</p>
+</dd>
+<dt>maturity_date_dict: Dict[str, DataFrame]</dt><dd><p>每个品种的每个合约的到期日，数据示例:
+{‘A’:     contract maturity_date</p>
+<blockquote>
+<div><p>0      A0303    2003-03-14
+1      A0305    2003-05-23
+2      A0307    2003-07-14
+3      A0309    2003-09-12
+4      A0311    2003-11-14
+..       …           …
+128    A0211    2002-11-14
+129    A0301    2003-01-15
+130    A2109    2021-09-14
+131    A2111    2021-11-12
+132    A2201    2022-01-17
+[133 rows x 2 columns]}</p>
+</div></blockquote>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="data_manager.BasicsDataManager.BasicsDataManager.get_all_instruments">
+<code class="sig-name descname"><span class="pre">get_all_instruments</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="headerlink" href="#data_manager.BasicsDataManager.BasicsDataManager.get_all_instruments" title="永久链接至目标">¶</a></dt>
+<dd><p>获取所有合约基础信息，合约基础信息包括以下fields:</p>
+<p>contract: 合约代码</p>
+<p>underlying_symbol: 品种代码</p>
+<p>market_tplus: 未知</p>
+<p>symbol: 期货简称</p>
+<p>margin rate: 期货合约的最低合约保证金率, maturity_date: 到期日</p>
+<p>type: 合约类型，’Future’, trading_code: 未知</p>
+<p>exchange: 交易所，DCE: 大商所，SHFE:上期所，CZCE: 郑商所，CFFEX: 中金所，INE: 能源交易所</p>
+<p>product: 合约种类，’Commodity’-商品期货，’Index’-股指期货，’Government’-国债期货</p>
+<p>contract_multiplier: 合约乘数</p>
+<p>round_lot: 期货全部为1.0</p>
+<p>trading_hours: 合约交易时间</p>
+<p>listed_date: 期货的上市日期</p>
+<p>industry_name: 行业</p>
+<p>de_listed_date: 期货到期日</p>
+<p>underlying_order_book_id:
+:return: 所有合约基础信息 DataFrame</p>
+<p class="rubric">实际案例</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="bp">self</span> <span class="o">=</span> <span class="n">BasicsDataManager</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_all_instruments</span><span class="p">())</span>
+<span class="go">     contract underlying_symbol  ...  de_listed_date underlying_order_book_id</span>
+<span class="go">0       A0303                 A  ...      2003-03-14                     null</span>
+<span class="go">1       A0305                 A  ...      2003-05-23                     null</span>
+<span class="go">2       A0307                 A  ...      2003-07-14                     null</span>
+<span class="go">3       A0309                 A  ...      2003-09-12                     null</span>
+<span class="go">4       A0311                 A  ...      2003-11-14                     null</span>
+<span class="go">    ...               ...  ...             ...                      ...</span>
+<span class="go">6616   EB2201                EB  ...      2022-01-26                     null</span>
+<span class="go">6617   PG2201                PG  ...      2022-01-26                     null</span>
+<span class="go">6620   FU2202                FU  ...      2022-01-31                     null</span>
+<span class="go">6623   SC2202                SC  ...      2022-01-31                     null</span>
+<span class="go">6624   LU2202                LU  ...      2022-01-31                     null</span>
+<span class="go">[6262 rows x 17 columns]</span>
+</pre></div>
+</div>
+<p>&gt;&gt;&gt;print(self.get_all_instruments().columns)</p>
+<dl class="simple">
+<dt>Index([‘contract’, ‘underlying_symbol’, ‘market_tplus’, ‘symbol’,</dt><dd><p>‘margin_rate’, ‘maturity_date’, ‘type’, ‘trading_code’, ‘exchange’,
+‘product’, ‘contract_multiplier’, ‘round_lot’, ‘trading_hours’,
+‘listed_date’, ‘industry_name’, ‘de_listed_date’,
+‘underlying_order_book_id’],
+dtype=’object’)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="data_manager.BasicsDataManager.BasicsDataManager.get_contract_list">
+<code class="sig-name descname"><span class="pre">get_contract_list</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbol</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#data_manager.BasicsDataManager.BasicsDataManager.get_contract_list" title="永久链接至目标">¶</a></dt>
+<dd><p>获取单一品种的合约列表</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><p><strong>symbol</strong> (<em>string</em>) – 品种代码</p>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>品种的合约列表</p>
+</dd>
+</dl>
+<p class="rubric">实际案例</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="bp">self</span> <span class="o">=</span> <span class="n">BasicsDataManager</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_contract_list</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">))</span>
+<span class="go">[&#39;A0303&#39;, &#39;A0305&#39;, &#39;A0307&#39;, &#39;A0309&#39;, &#39;A0311&#39;, &#39;A0401&#39;, &#39;A0403&#39;, &#39;A0405&#39;, &#39;A0407&#39;, &#39;A0409&#39;,...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="data_manager.BasicsDataManager.BasicsDataManager.get_maturity_date">
+<code class="sig-name descname"><span class="pre">get_maturity_date</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbol</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="headerlink" href="#data_manager.BasicsDataManager.BasicsDataManager.get_maturity_date" title="永久链接至目标">¶</a></dt>
+<dd><p>获取某个品种所有合约的到期日</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><p><strong>symbol</strong> (<em>string</em>) – 品种代码</p>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>品种到期日期，DataFrame，一共两列，第一列为合约(contract)，第二列为到期日(maturity_date)</p>
+</dd>
+</dl>
+<p class="rubric">实际案例</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="bp">self</span> <span class="o">=</span> <span class="n">BasicsDataManager</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_maturity_date</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">))</span>
+<span class="go">    contract maturity_date</span>
+<span class="go">0      A0303    2003-03-14</span>
+<span class="go">1      A0305    2003-05-23</span>
+<span class="go">2      A0307    2003-07-14</span>
+<span class="go">3      A0309    2003-09-12</span>
+<span class="go">4      A0311    2003-11-14</span>
+<span class="go">..       ...           ...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="data_manager.BasicsDataManager.BasicsDataManager.get_symbol_list">
+<code class="sig-name descname"><span class="pre">get_symbol_list</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#data_manager.BasicsDataManager.BasicsDataManager.get_symbol_list" title="永久链接至目标">¶</a></dt>
+<dd><p>获取品种代码列表</p>
+<dl class="field-list simple">
+<dt class="field-odd">返回</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">返回类型</dt>
+<dd class="field-even"><p>品种代码列表</p>
+</dd>
+</dl>
+<p class="rubric">实际案例</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="bp">self</span> <span class="o">=</span> <span class="n">BasicsDataManager</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_symbol_list</span><span class="p">())</span>
+<span class="go">[&#39;A&#39;, &#39;AG&#39;, &#39;AL&#39;, &#39;AP&#39;, &#39;AU&#39;, &#39;B&#39;, &#39;BB&#39;, &#39;BU&#39;, &#39;C&#39;, &#39;CF&#39;, &#39;CJ&#39;, &#39;CS&#39;, &#39;CU&#39;, &#39;CY&#39;,...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="data_manager.BasicsDataManager.BasicsDataManager.get_trade_cal">
+<code class="sig-name descname"><span class="pre">get_trade_cal</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.indexes.datetimes.DatetimeIndex</span><a class="headerlink" href="#data_manager.BasicsDataManager.BasicsDataManager.get_trade_cal" title="永久链接至目标">¶</a></dt>
+<dd><p>获取交易日历</p>
+<dl class="field-list simple">
+<dt class="field-odd">返回</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">返回类型</dt>
+<dd class="field-even"><p>交易日历，DatetimeIndex</p>
+</dd>
+</dl>
+<p class="rubric">实际案例</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="bp">self</span> <span class="o">=</span> <span class="n">BasicsDataManager</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_trade_cal</span><span class="p">())</span>
+<span class="go">DatetimeIndex([&#39;2008-01-02&#39;, &#39;2008-01-03&#39;, &#39;2008-01-04&#39;, &#39;2008-01-07&#39;,</span>
+<span class="go">       &#39;2008-01-08&#39;, &#39;2008-01-09&#39;, &#39;2008-01-10&#39;, &#39;2008-01-11&#39;,</span>
+<span class="go">       &#39;2008-01-14&#39;, &#39;2008-01-15&#39;,</span>
+<span class="go">       ...</span>
+<span class="go">       &#39;2021-12-20&#39;, &#39;2021-12-21&#39;, &#39;2021-12-22&#39;, &#39;2021-12-23&#39;,</span>
+<span class="go">       &#39;2021-12-24&#39;, &#39;2021-12-27&#39;, &#39;2021-12-28&#39;, &#39;2021-12-29&#39;,</span>
+<span class="go">       &#39;2021-12-30&#39;, &#39;2021-12-31&#39;],</span>
+<span class="go">      dtype=&#39;datetime64[ns]&#39;, length=3409, freq=None)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-data_manager.CommodityPoolManager">
+<span id="data-manager-commoditypoolmanager-module"></span><h2>data_manager.CommodityPoolManager module<a class="headerlink" href="#module-data_manager.CommodityPoolManager" title="永久链接至标题">¶</a></h2>
+<dl class="py class">
+<dt id="data_manager.CommodityPoolManager.CommodityPoolManager">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">data_manager.CommodityPoolManager.</span></code><code class="sig-name descname"><span class="pre">CommodityPoolManager</span></code><a class="headerlink" href="#data_manager.CommodityPoolManager.CommodityPoolManager" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>商品池处理器</p>
+<p>1.检查是否存在某个商品池
+2.获取商品池数据
+3.保存商品池数据
+4.保存商品池信息</p>
+<dl class="py attribute">
+<dt id="data_manager.CommodityPoolManager.CommodityPoolManager.commodity_pool_file_folder_path">
+<code class="sig-name descname"><span class="pre">commodity_pool_file_folder_path</span></code><a class="headerlink" href="#data_manager.CommodityPoolManager.CommodityPoolManager.commodity_pool_file_folder_path" title="永久链接至目标">¶</a></dt>
+<dd><p>商品池代码文件路径</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>pathlib.Path</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="data_manager.CommodityPoolManager.CommodityPoolManager.commodity_pool_data_folder_path">
+<code class="sig-name descname"><span class="pre">commodity_pool_data_folder_path</span></code><a class="headerlink" href="#data_manager.CommodityPoolManager.CommodityPoolManager.commodity_pool_data_folder_path" title="永久链接至目标">¶</a></dt>
+<dd><p>商品池数据文件夹路径</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>pathlib.Path</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="data_manager.CommodityPoolManager.CommodityPoolManager.commodity_pool_dict">
+<code class="sig-name descname"><span class="pre">commodity_pool_dict</span></code><a class="headerlink" href="#data_manager.CommodityPoolManager.CommodityPoolManager.commodity_pool_dict" title="永久链接至目标">¶</a></dt>
+<dd><p>商品池字典，双层字典，外层为商品池名称: 该商品池的不同参数的具体商品池的字典，内层为商品池参数: 商品池DataFrame</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Dict[str, Dict[str, <a class="reference internal" href="commodity_pool.html#commodity_pool.base.BaseCommodityPool" title="commodity_pool.base.BaseCommodityPool">BaseCommodityPool</a>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">提示</p>
+<p>CommodityPoolManager不涉及商品池构建的代码，商品池构建的代码详见commodity_pool.CommodityPool</p>
+<div class="admonition seealso">
+<p class="admonition-title">参见</p>
+<p><code class="xref py py-obj docutils literal notranslate"><span class="pre">commodity_pool.CommodityPool</span></code></p>
+</div>
+<dl class="py method">
+<dt id="data_manager.CommodityPoolManager.CommodityPoolManager.compute_commodity_pool">
+<code class="sig-name descname"><span class="pre">compute_commodity_pool</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="commodity_pool.html#commodity_pool.base.BaseCommodityPool" title="commodity_pool.base.BaseCommodityPool"><span class="pre">commodity_pool.base.BaseCommodityPool</span></a><a class="headerlink" href="#data_manager.CommodityPoolManager.CommodityPoolManager.compute_commodity_pool" title="永久链接至目标">¶</a></dt>
+<dd><p>计算商品池数据DataFrame</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>group</strong> (<em>str</em>) – 商品池类别, FixedPool或者DynamicPool</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – 商品池名称</p></li>
+<li><p><strong>overwrite</strong> (<em>bool</em><em>, </em><em>default False</em>) – 是否覆盖</p></li>
+<li><p><strong>params</strong> (<em>可变参数</em>) – 商品池参数</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p><strong>commodity_pool_instance</strong> – 商品池实例，可获取商品池参数，商品池数值DataFrame</p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p><a class="reference internal" href="commodity_pool.html#commodity_pool.base.BaseCommodityPool" title="commodity_pool.base.BaseCommodityPool">BaseCommodityPool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="data_manager.CommodityPoolManager.CommodityPoolManager.get_commodity_pool">
+<code class="sig-name descname"><span class="pre">get_commodity_pool</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="commodity_pool.html#commodity_pool.base.BaseCommodityPool" title="commodity_pool.base.BaseCommodityPool"><span class="pre">commodity_pool.base.BaseCommodityPool</span></a><a class="headerlink" href="#data_manager.CommodityPoolManager.CommodityPoolManager.get_commodity_pool" title="永久链接至目标">¶</a></dt>
+<dd><p>获取商品池</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>group</strong> (<em>str</em>) – 商品池类别，即FixedPool或者DynamicPool</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – 商品池名称</p></li>
+<li><p><strong>overwrite</strong> (<em>bool</em><em>, </em><em>default False</em>) – 是否覆盖目前已有的商品池数据</p></li>
+<li><p><strong>params</strong> (<em>可变参数</em>) – 商品池参数</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p><strong>commodity_pool_instance</strong> – 商品池实例，可获取商品池参数，商品池数值DataFrame</p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p><a class="reference internal" href="commodity_pool.html#commodity_pool.base.BaseCommodityPool" title="commodity_pool.base.BaseCommodityPool">BaseCommodityPool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="data_manager.CommodityPoolManager.CommodityPoolManager.get_commodity_pool_in_out">
+<code class="sig-name descname"><span class="pre">get_commodity_pool_in_out</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#data_manager.CommodityPoolManager.CommodityPoolManager.get_commodity_pool_in_out" title="永久链接至目标">¶</a></dt>
+<dd><p>获取商品池中品种每日进出及每个品种的进出次数
+:param group:
+:param name:
+:param params:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="data_manager.CommodityPoolManager.CommodityPoolManager.get_commodity_pool_time_series_plot">
+<code class="sig-name descname"><span class="pre">get_commodity_pool_time_series_plot</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.series.Series</span><a class="headerlink" href="#data_manager.CommodityPoolManager.CommodityPoolManager.get_commodity_pool_time_series_plot" title="永久链接至目标">¶</a></dt>
+<dd><p>获取商品池中的品种数目变化图</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>group</strong> (<em>str</em>) – 商品池类别，即FixedPool或者DynamicPool</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – 商品池名称</p></li>
+<li><p><strong>params</strong> (<em>可变参数</em>) – 商品池参数</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="data_manager.CommodityPoolManager.CommodityPoolManager.get_file_name">
+<code class="sig-name descname"><span class="pre">get_file_name</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">str</span><a class="headerlink" href="#data_manager.CommodityPoolManager.CommodityPoolManager.get_file_name" title="永久链接至目标">¶</a></dt>
+<dd><p>将参数字典转化为文件名，即参数1_参数值1 参数2_参数值2 参数3_参数值3 xxx</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><p><strong>params</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – 参数字典</p>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p><strong>string</strong> – 参数1_参数值1 参数2_参数值2 参数3_参数值3 xxx</p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="data_manager.CommodityPoolManager.CommodityPoolManager.import_commodity_pool_class">
+<code class="sig-name descname"><span class="pre">import_commodity_pool_class</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="commodity_pool.html#commodity_pool.base.BaseCommodityPool" title="commodity_pool.base.BaseCommodityPool"><span class="pre">commodity_pool.base.BaseCommodityPool</span></a><a class="headerlink" href="#data_manager.CommodityPoolManager.CommodityPoolManager.import_commodity_pool_class" title="永久链接至目标">¶</a></dt>
+<dd><p>根据group和name导入商品池类</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>group</strong> (<em>str</em>) – 商品池类别，即FixedPool或者DynamicPool</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – 商品池名称</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p><strong>commodity_pool_class</strong></p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>商品池类</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="data_manager.CommodityPoolManager.CommodityPoolManager.save_commodity_pool">
+<code class="sig-name descname"><span class="pre">save_commodity_pool</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#data_manager.CommodityPoolManager.CommodityPoolManager.save_commodity_pool" title="永久链接至目标">¶</a></dt>
+<dd><p>保存商品池数据</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>group</strong> (<em>str</em>) – 商品池类别, FixedPool或者DynamicPool</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – 商品池名称</p></li>
+<li><p><strong>overwrite</strong> (<em>bool</em><em>, </em><em>default False</em>) – 是否覆盖本地已有的商品池数据</p></li>
+<li><p><strong>params</strong> – 商品池参数</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-data_manager.ContinuousContractDataManager">
+<span id="data-manager-continuouscontractdatamanager-module"></span><h2>data_manager.ContinuousContractDataManager module<a class="headerlink" href="#module-data_manager.ContinuousContractDataManager" title="永久链接至标题">¶</a></h2>
+<dl class="py class">
+<dt id="data_manager.ContinuousContractDataManager.ContinuousContractDataManager">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">data_manager.ContinuousContractDataManager.</span></code><code class="sig-name descname"><span class="pre">ContinuousContractDataManager</span></code><a class="headerlink" href="#data_manager.ContinuousContractDataManager.ContinuousContractDataManager" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>连续合约数据管理器，目前仅支持主力合约</p>
+<p>提取已生成的连续合约数据，不涉及连续合约数据的生成</p>
+<dl class="py attribute">
+<dt id="data_manager.ContinuousContractDataManager.ContinuousContractDataManager.data_folder_path">
+<code class="sig-name descname"><span class="pre">data_folder_path</span></code><a class="headerlink" href="#data_manager.ContinuousContractDataManager.ContinuousContractDataManager.data_folder_path" title="永久链接至目标">¶</a></dt>
+<dd><p>连续合约数据的文件夹路径</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>pathlib.Path</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="data_manager.ContinuousContractDataManager.ContinuousContractDataManager.continuous_main_contract_series_dict">
+<code class="sig-name descname"><span class="pre">continuous_main_contract_series_dict</span></code><a class="headerlink" href="#data_manager.ContinuousContractDataManager.ContinuousContractDataManager.continuous_main_contract_series_dict" title="永久链接至目标">¶</a></dt>
+<dd><p>主力连续合约数据字典，key为几日换仓，value为主力连续合约数据</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Dict[str, DataFrame]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="data_manager.ContinuousContractDataManager.ContinuousContractDataManager.continuous_active_near_contract_series_dict">
+<code class="sig-name descname"><span class="pre">continuous_active_near_contract_series_dict</span></code><a class="headerlink" href="#data_manager.ContinuousContractDataManager.ContinuousContractDataManager.continuous_active_near_contract_series_dict" title="永久链接至目标">¶</a></dt>
+<dd><p>活跃近月合约数据字典，key为几日换仓，value为活跃近月合约数据</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Dict[str, DataFrame]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">实际案例</p>
+<dl class="simple">
+<dt>1.主力连续合约数据示例:</dt><dd><p>datetime main_contract_before_shift main_contract  flag old_main_contract      0 2009-01-05                      A0905         A0905   0.0             A0905</p>
+</dd>
+</dl>
+<p>1 2009-01-06                      A0905         A0905   0.0             A0905
+2 2009-01-07                      A0905         A0905   0.0             A0905
+3 2009-01-08                      A0905         A0905   0.0             A0905
+4 2009-01-09                      A0905         A0905   0.0             A0905</p>
+<blockquote>
+<div><p>new_main_contract  old_weight  new_weight  old_return  new_return    return      0             A0905         0.0         1.0    0.000000    0.000000  0.000000</p>
+</div></blockquote>
+<p>1             A0905         0.0         1.0    0.013478    0.013478  0.013478
+2             A0905         0.0         1.0   -0.003180   -0.003180 -0.003180
+3             A0905         0.0         1.0   -0.008121   -0.008121 -0.008121
+4             A0905         0.0         1.0    0.012281    0.012281  0.012281</p>
+<blockquote>
+<div><p>cum_return  continuous_close underlying_symbol</p>
+</div></blockquote>
+<p>0    1.000000            3413.0                 A
+1    1.013478            3459.0                 A
+2    1.010255            3448.0                 A
+3    1.002051            3420.0                 A
+4    1.014357            3462.0                 A</p>
+<div class="admonition seealso">
+<p class="admonition-title">参见</p>
+<p><code class="xref py py-obj docutils literal notranslate"><span class="pre">continuous_contract.ContunuousMainContract</span></code></p>
+</div>
+<dl class="py method">
+<dt id="data_manager.ContinuousContractDataManager.ContinuousContractDataManager.get_Fuwei_data">
+<code class="sig-name descname"><span class="pre">get_Fuwei_data</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="headerlink" href="#data_manager.ContinuousContractDataManager.ContinuousContractDataManager.get_Fuwei_data" title="永久链接至目标">¶</a></dt>
+<dd><p>获取复位数据</p>
+<dl class="field-list simple">
+<dt class="field-odd">返回</dt>
+<dd class="field-odd"><p><strong>df</strong></p>
+</dd>
+<dt class="field-even">返回类型</dt>
+<dd class="field-even"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="data_manager.ContinuousContractDataManager.ContinuousContractDataManager.get_continuous_contract_data">
+<code class="sig-name descname"><span class="pre">get_continuous_contract_data</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">contract</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'main'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">price</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'close'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rebalance_num</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="headerlink" href="#data_manager.ContinuousContractDataManager.ContinuousContractDataManager.get_continuous_contract_data" title="永久链接至目标">¶</a></dt>
+<dd><p>导入主力连续合约数据,有以下fields</p>
+<p>datetime: 交易日期</p>
+<p>main_contract_before_shift: shift(1)之前的期货主力合约，即时间戳实际为收盘时决定合约的时间</p>
+<p>main_contract: 主力连续合约代码</p>
+<p>old_main_contract: 旧主力合约，如果不换仓则为主力合约</p>
+<p>new_main_contract: 新主力合约，如果不换仓则为主力合约</p>
+<p>old_weight: 旧主力合约权重，不换仓时为0</p>
+<p>new_weight: 新主力合约权重，不换仓时为1</p>
+<p>old_return: 旧主力合约日收益率</p>
+<p>new_return: 新主力合约日收益率</p>
+<p>return: 主力连续合约日收益率</p>
+<p>cum_return: 主力连续合约累计收益率，第一天为1</p>
+<p>continuous_close: 主力连续合约收盘价，由累计收益率x第一天主力合约的收盘价得到</p>
+<p>underlying_symbol: 品种代码</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><p><strong>rebalance_num</strong> (<em>int</em>) – 换仓日期，可选1，3，5</p>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>DataFrame, 主力连续合约数据</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="data_manager.ContinuousContractDataManager.ContinuousContractDataManager.get_field">
+<code class="sig-name descname"><span class="pre">get_field</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">contract</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'main'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">price</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'close'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rebalance_num</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'continuous_price'</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="headerlink" href="#data_manager.ContinuousContractDataManager.ContinuousContractDataManager.get_field" title="永久链接至目标">¶</a></dt>
+<dd><p>获取连续合约指定字段的数据
+:param contract: 合约种类，目前可选有main和active_near,main表示主力合约,active_near表示活跃近月
+:type contract: str
+:param rebalance_num: 换仓天数，可选1，3，5
+:type rebalance_num: int, default = 1
+:param field: 字段，continuous_open或者continuous_close
+:type field: str, default = ‘close’</p>
+<dl class="field-list simple">
+<dt class="field-odd">返回</dt>
+<dd class="field-odd"><p><strong>df</strong> – 连续合约field字段数据，一般是开盘价或收盘价</p>
+</dd>
+<dt class="field-even">返回类型</dt>
+<dd class="field-even"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-data_manager.DailyDataManager">
+<span id="data-manager-dailydatamanager-module"></span><h2>data_manager.DailyDataManager module<a class="headerlink" href="#module-data_manager.DailyDataManager" title="永久链接至标题">¶</a></h2>
+<dl class="py class">
+<dt id="data_manager.DailyDataManager.DailyDataManager">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">data_manager.DailyDataManager.</span></code><code class="sig-name descname"><span class="pre">DailyDataManager</span></code><a class="headerlink" href="#data_manager.DailyDataManager.DailyDataManager" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>期货日线行情管理器</p>
+<p>DailyDataManager提取单一品种期货日线行情数据的某个字段的数据，包括:
+结算价settlement, 前结算价prev_settlement, 开盘价open, 最高价high,
+最低价low, 收盘价close, 成交量volume, 持仓量open_interest,
+成交额turnover, 涨停价upper_limit, 跌停价lower_limit</p>
+<dl class="py attribute">
+<dt id="data_manager.DailyDataManager.DailyDataManager.data_folder_path">
+<code class="sig-name descname"><span class="pre">data_folder_path</span></code><a class="headerlink" href="#data_manager.DailyDataManager.DailyDataManager.data_folder_path" title="永久链接至目标">¶</a></dt>
+<dd><p>数据文件夹路径</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>pathlib.Path</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="data_manager.DailyDataManager.DailyDataManager.daily_data">
+<code class="sig-name descname"><span class="pre">daily_data</span></code><a class="headerlink" href="#data_manager.DailyDataManager.DailyDataManager.daily_data" title="永久链接至目标">¶</a></dt>
+<dd><p>期货日线数据</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="data_manager.DailyDataManager.DailyDataManager.fields_dict">
+<code class="sig-name descname"><span class="pre">fields_dict</span></code><a class="headerlink" href="#data_manager.DailyDataManager.DailyDataManager.fields_dict" title="永久链接至目标">¶</a></dt>
+<dd><p>双层字典，结构为{字段1:{品种1: 字段数据1, 品种2: 字段数据2, …}, 字段2: {品种1: 字段数据1, …}}
+每次运行完get_field的数据会保存在这里。</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>dictionary</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="data_manager.DailyDataManager.DailyDataManager.get_daily_data">
+<code class="sig-name descname"><span class="pre">get_daily_data</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="headerlink" href="#data_manager.DailyDataManager.DailyDataManager.get_daily_data" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="data_manager.DailyDataManager.DailyDataManager.get_field">
+<code class="sig-name descname"><span class="pre">get_field</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbol</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="headerlink" href="#data_manager.DailyDataManager.DailyDataManager.get_field" title="永久链接至目标">¶</a></dt>
+<dd><p>获取单品种收盘价DataFrame</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>symbol</strong> (<em>string</em>) – 品种代码</p></li>
+<li><p><strong>field</strong> (<em>string</em>) – 要获取的字段，如open, high, low, close</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>单品种不同合约的收盘价，index是交易日期，columns是合约代码，data是字段值</em></p></li>
+<li><p><em>Example</em></p></li>
+<li><p><em>________</em></p></li>
+<li><p><em>&gt;&gt;&gt; self = DailyDataManager()</em></p></li>
+<li><p><em>&gt;&gt;&gt; df = self.get_field(“A”, “close”)</em></p></li>
+<li><p><em>&gt;&gt;&gt;&gt;print(df)</em></p></li>
+<li><p><em>contract     A0901   A0903   A0905   A0907  …   A2105   A2107   A2109   A2111</em></p></li>
+<li><p><em>datetime                                    …</em></p></li>
+<li><p><em>2009-01-05  3660.0  3598.0  3413.0  3308.0  …     NaN     NaN     NaN     NaN</em></p></li>
+<li><p><em>2009-01-06  3679.0  3630.0  3459.0  3360.0  …     NaN     NaN     NaN     NaN</em></p></li>
+<li><p><em>2009-01-07  3599.0  3610.0  3448.0  3360.0  …     NaN     NaN     NaN     NaN</em></p></li>
+<li><p><em>2009-01-08  3600.0  3623.0  3420.0  3348.0  …     NaN     NaN     NaN     NaN</em></p></li>
+<li><p><em>2009-01-09  3600.0  3623.0  3462.0  3407.0  …     NaN     NaN     NaN     NaN</em></p></li>
+<li><p><em>…</em></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="data_manager.DailyDataManager.DailyDataManager.get_symbol_list">
+<code class="sig-name descname"><span class="pre">get_symbol_list</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#data_manager.DailyDataManager.DailyDataManager.get_symbol_list" title="永久链接至目标">¶</a></dt>
+<dd><p>获取期货品种列表</p>
+<dl class="field-list simple">
+<dt class="field-odd">返回</dt>
+<dd class="field-odd"><p><strong>symbol_list</strong> – 期货品种列表</p>
+</dd>
+<dt class="field-even">返回类型</dt>
+<dd class="field-even"><p>List[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="data_manager.DailyDataManager.DailyDataManager.init_daily_data">
+<code class="sig-name descname"><span class="pre">init_daily_data</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#data_manager.DailyDataManager.DailyDataManager.init_daily_data" title="永久链接至目标">¶</a></dt>
+<dd><p>初始化期货日线数据，构造函数中自动运行</p>
+<dl class="field-list simple">
+<dt class="field-odd">返回</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">返回类型</dt>
+<dd class="field-even"><p>None， 无返回值</p>
+</dd>
+</dl>
+<p class="rubric">实际案例</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="s2">&quot;D:/LFProjects/PythonProject/data/futures_daily_20210213_1.pkl&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span>
+<span class="go">        contract   datetime  settlement  prev_settlement    close      low  ...     open  lower_limit   turnover  underlying_symbol  upper_limit_tag  lower_limit_tag</span>
+<span class="go">0          A0901 2009-01-05      3696.0           3699.0   3660.0   3560.0  ...   3736.0       3478.0  9168100.0                  A              0.0              0.0</span>
+<span class="go">1          A0901 2009-01-06      3586.0           3696.0   3679.0   3580.0  ...   3583.0       3475.0  2582200.0                  A              0.0              0.0</span>
+<span class="go">2          A0901 2009-01-07      3599.0           3586.0   3599.0   3599.0  ...   3600.0       3371.0  8926300.0                  A              0.0              0.0</span>
+<span class="go">3          A0901 2009-01-08      3599.0           3599.0   3600.0   3599.0  ...   3599.0       3384.0  2591900.0                  A              0.0              0.0</span>
+<span class="go">4          A0901 2009-01-09      3599.0           3599.0   3600.0   3599.0  ...   3600.0       3384.0  1584000.0                  A              0.0              0.0</span>
+<span class="gp">... </span>         <span class="o">...</span>        <span class="o">...</span>         <span class="o">...</span>              <span class="o">...</span>      <span class="o">...</span>      <span class="o">...</span>  <span class="o">...</span>      <span class="o">...</span>          <span class="o">...</span>        <span class="o">...</span>                <span class="o">...</span>              <span class="o">...</span>              <span class="o">...</span>
+<span class="go">1158138   ZN2112 2020-12-16     21280.0          21060.0  21145.0  21060.0  ...  21060.0      18530.0  2234675.0                 ZN              0.0              0.0</span>
+<span class="go">1158139   ZN2112 2020-12-17     21280.0          21280.0  21280.0  21280.0  ...  21280.0      20000.0        0.0                 ZN              0.0              0.0</span>
+<span class="go">1158140   ZN2112 2020-12-18     21280.0          21280.0  21280.0  21280.0  ...  21280.0      20000.0        0.0                 ZN              0.0              0.0</span>
+<span class="go">1158141   ZN2112 2020-12-21     21480.0          21280.0  21465.0  21280.0  ...  21280.0      20000.0   859200.0                 ZN              1.0              0.0</span>
+<span class="go">1158142   ZN2112 2020-12-22     21445.0          21480.0  21390.0  21390.0  ...  21465.0      20190.0   214475.0                 ZN              1.0              0.0</span>
+</pre></div>
+</div>
+<p>[1158143 rows x 16 columns]</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-data_manager.FactorDataManager">
+<span id="data-manager-factordatamanager-module"></span><h2>data_manager.FactorDataManager module<a class="headerlink" href="#module-data_manager.FactorDataManager" title="永久链接至标题">¶</a></h2>
+<dl class="py class">
+<dt id="data_manager.FactorDataManager.FactorDataManager">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">data_manager.FactorDataManager.</span></code><code class="sig-name descname"><span class="pre">FactorDataManager</span></code><a class="headerlink" href="#data_manager.FactorDataManager.FactorDataManager" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>因子数据管理器</p>
+<dl class="py attribute">
+<dt id="data_manager.FactorDataManager.FactorDataManager.factor_file_folder_path">
+<code class="sig-name descname"><span class="pre">factor_file_folder_path</span></code><a class="headerlink" href="#data_manager.FactorDataManager.FactorDataManager.factor_file_folder_path" title="永久链接至目标">¶</a></dt>
+<dd><p>因子代码文件夹路径</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>pathlib.Path</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="data_manager.FactorDataManager.FactorDataManager.factor_data_folder_path">
+<code class="sig-name descname"><span class="pre">factor_data_folder_path</span></code><a class="headerlink" href="#data_manager.FactorDataManager.FactorDataManager.factor_data_folder_path" title="永久链接至目标">¶</a></dt>
+<dd><p>因子数据文件夹路径</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>pathlib.Path</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="data_manager.FactorDataManager.FactorDataManager.factor_group_list">
+<code class="sig-name descname"><span class="pre">factor_group_list</span></code><a class="headerlink" href="#data_manager.FactorDataManager.FactorDataManager.factor_group_list" title="永久链接至目标">¶</a></dt>
+<dd><p>因子类别列表</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="data_manager.FactorDataManager.FactorDataManager.factor_dict">
+<code class="sig-name descname"><span class="pre">factor_dict</span></code><a class="headerlink" href="#data_manager.FactorDataManager.FactorDataManager.factor_dict" title="永久链接至目标">¶</a></dt>
+<dd><p>因子数据字典，key为因子名称，value为因子实例</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Dict[str, DataFrame]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">提示</p>
+<p>1.因子代码的路径为factor</p>
+<p>2.因子数据的路径为data/factor</p>
+<dl class="py method">
+<dt id="data_manager.FactorDataManager.FactorDataManager.check_local_factor_data">
+<code class="sig-name descname"><span class="pre">check_local_factor_data</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">bool</span><a class="headerlink" href="#data_manager.FactorDataManager.FactorDataManager.check_local_factor_data" title="永久链接至目标">¶</a></dt>
+<dd><p>检查本地是否有因子值</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>group</strong> (<em>str</em>) – 因子类别</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – 因子名称</p></li>
+<li><p><strong>params</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – 因子参数</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>True ro False</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="data_manager.FactorDataManager.FactorDataManager.compute_factor">
+<code class="sig-name descname"><span class="pre">compute_factor</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="factor.html#factor.base.BaseFactor" title="factor.base.BaseFactor"><span class="pre">factor.base.BaseFactor</span></a><a class="headerlink" href="#data_manager.FactorDataManager.FactorDataManager.compute_factor" title="永久链接至目标">¶</a></dt>
+<dd><p>计算因子数据DataFrame</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>group</strong> (<em>str</em>) – 因子类别</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – 因子名称</p></li>
+<li><p><strong>overwrite</strong> (<em>bool</em><em>, </em><em>default False</em>) – 是否覆盖</p></li>
+<li><p><strong>params</strong> – 因子参数</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p><strong>factor_instance</strong> – 因子实例，可获取因子参数，因子数值DataFrame</p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p><a class="reference internal" href="commodity_pool.html#commodity_pool.base.BaseCommodityPool" title="commodity_pool.base.BaseCommodityPool">BaseCommodityPool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="data_manager.FactorDataManager.FactorDataManager.get_factor">
+<code class="sig-name descname"><span class="pre">get_factor</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="factor.html#factor.base.BaseFactor" title="factor.base.BaseFactor"><span class="pre">factor.base.BaseFactor</span></a><a class="headerlink" href="#data_manager.FactorDataManager.FactorDataManager.get_factor" title="永久链接至目标">¶</a></dt>
+<dd><p>获取因子值</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>group</strong> (<em>str</em>) – 因子组</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – 因子名称</p></li>
+<li><p><strong>overwrite</strong> (<em>bool</em><em>, </em><em>default False</em>) – 是否覆盖，即在本地有因子值时是否覆盖更新</p></li>
+<li><p><strong>params</strong> – 因子参数，字典形式，{参数1: 参数1值, 参数2: 参数2值, 参数3: 参数3值…}</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p><strong>factor</strong> – 因子实例</p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p><a class="reference internal" href="factor.html#factor.base.BaseFactor" title="factor.base.BaseFactor">BaseFactor</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="data_manager.FactorDataManager.FactorDataManager.get_file_name">
+<code class="sig-name descname"><span class="pre">get_file_name</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">str</span><a class="headerlink" href="#data_manager.FactorDataManager.FactorDataManager.get_file_name" title="永久链接至目标">¶</a></dt>
+<dd><p>将参数字典转化为文件名，即参数1_参数值1 参数2_参数值2 参数3_参数值3 xxx</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><p><strong>params</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – 参数字典</p>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p><strong>string</strong> – 参数1_参数值1 参数2_参数值2 参数3_参数值3 xxx</p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="data_manager.FactorDataManager.FactorDataManager.import_factor_class">
+<code class="sig-name descname"><span class="pre">import_factor_class</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="factor.html#factor.base.BaseFactor" title="factor.base.BaseFactor"><span class="pre">factor.base.BaseFactor</span></a><a class="headerlink" href="#data_manager.FactorDataManager.FactorDataManager.import_factor_class" title="永久链接至目标">¶</a></dt>
+<dd><p>根据group和name导入因子类</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>group</strong> (<em>str</em>) – 因子类别，如CarryFactor, MomentumFactor</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – 因子名称</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p><strong>factor_class</strong></p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>因子类</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="data_manager.FactorDataManager.FactorDataManager.init_factor_group_list">
+<code class="sig-name descname"><span class="pre">init_factor_group_list</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#data_manager.FactorDataManager.FactorDataManager.init_factor_group_list" title="永久链接至目标">¶</a></dt>
+<dd><p>初始化因子类别列表</p>
+<dl class="field-list simple">
+<dt class="field-odd">返回</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">返回类型</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="data_manager.FactorDataManager.FactorDataManager.save_factor">
+<code class="sig-name descname"><span class="pre">save_factor</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#data_manager.FactorDataManager.FactorDataManager.save_factor" title="永久链接至目标">¶</a></dt>
+<dd><p>保存因子数据</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>group</strong> (<em>str</em>) – 因子类别</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – 因子名称</p></li>
+<li><p><strong>overwrite</strong> (<em>bool</em><em>, </em><em>default False</em>) – 是否覆盖本地已有的因子数据</p></li>
+<li><p><strong>params</strong> – 因子参数</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-data_manager.IndexDataManager">
+<span id="data-manager-indexdatamanager-module"></span><h2>data_manager.IndexDataManager module<a class="headerlink" href="#module-data_manager.IndexDataManager" title="永久链接至标题">¶</a></h2>
+<dl class="py class">
+<dt id="data_manager.IndexDataManager.IndexDataManager">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">data_manager.IndexDataManager.</span></code><code class="sig-name descname"><span class="pre">IndexDataManager</span></code><a class="headerlink" href="#data_manager.IndexDataManager.IndexDataManager" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>指数数据提取器</p>
+<dl class="py method">
+<dt id="data_manager.IndexDataManager.IndexDataManager.get_all_industry_index">
+<code class="sig-name descname"><span class="pre">get_all_industry_index</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="headerlink" href="#data_manager.IndexDataManager.IndexDataManager.get_all_industry_index" title="永久链接至目标">¶</a></dt>
+<dd><p>获取所有行业的指数</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="data_manager.IndexDataManager.IndexDataManager.get_commodity_index">
+<code class="sig-name descname"><span class="pre">get_commodity_index</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.series.Series</span><a class="headerlink" href="#data_manager.IndexDataManager.IndexDataManager.get_commodity_index" title="永久链接至目标">¶</a></dt>
+<dd><p>获取商品指数</p>
+<dl class="field-list simple">
+<dt class="field-odd">返回</dt>
+<dd class="field-odd"><p><strong>commodity_index</strong> – 商品指数,index是交易时间, data是指数数值</p>
+</dd>
+<dt class="field-even">返回类型</dt>
+<dd class="field-even"><p>Series</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="data_manager.IndexDataManager.IndexDataManager.get_industry_index">
+<code class="sig-name descname"><span class="pre">get_industry_index</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">industry_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.series.Series</span><a class="headerlink" href="#data_manager.IndexDataManager.IndexDataManager.get_industry_index" title="永久链接至目标">¶</a></dt>
+<dd><p>获取行业指数</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><p><strong>industry_name</strong> (<em>str</em>) – 行业名称</p>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p><strong>industry_index</strong> – 行业指数</p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>Series</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="data_manager.IndexDataManager.IndexDataManager.get_industry_list">
+<code class="sig-name descname"><span class="pre">get_industry_list</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#data_manager.IndexDataManager.IndexDataManager.get_industry_list" title="永久链接至目标">¶</a></dt>
+<dd><p>获取行业列表</p>
+<dl class="field-list simple">
+<dt class="field-odd">返回</dt>
+<dd class="field-odd"><p><strong>industry_list</strong> – 行业列表</p>
+</dd>
+<dt class="field-even">返回类型</dt>
+<dd class="field-even"><p>List[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="data_manager.IndexDataManager.IndexDataManager.get_industry_symbol_map">
+<code class="sig-name descname"><span class="pre">get_industry_symbol_map</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#data_manager.IndexDataManager.IndexDataManager.get_industry_symbol_map" title="永久链接至目标">¶</a></dt>
+<dd><p>获取行业品种映射表</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="data_manager.IndexDataManager.IndexDataManager.get_symbol_index">
+<code class="sig-name descname"><span class="pre">get_symbol_index</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbol</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.series.Series</span><a class="headerlink" href="#data_manager.IndexDataManager.IndexDataManager.get_symbol_index" title="永久链接至目标">¶</a></dt>
+<dd><p>获取品种指数</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><p><strong>symbol</strong> (<em>str</em>) – 品种代码</p>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p><strong>symbol_index</strong> – 品种指数</p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>Series</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="data_manager.IndexDataManager.IndexDataManager.plot_all_industry">
+<code class="sig-name descname"><span class="pre">plot_all_industry</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#data_manager.IndexDataManager.IndexDataManager.plot_all_industry" title="永久链接至目标">¶</a></dt>
+<dd><p>画总商品指数和行业指数</p>
+<dl class="field-list simple">
+<dt class="field-odd">返回</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">返回类型</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="data_manager.IndexDataManager.IndexDataManager.plot_industry_symbol">
+<code class="sig-name descname"><span class="pre">plot_industry_symbol</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">industry_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#data_manager.IndexDataManager.IndexDataManager.plot_industry_symbol" title="永久链接至目标">¶</a></dt>
+<dd><p>画行业及该行业品种指数</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><p><strong>industry_name</strong> (<em>str</em>) – 行业名称</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-data_manager.IndustryDataManager">
+<span id="data-manager-industrydatamanager-module"></span><h2>data_manager.IndustryDataManager module<a class="headerlink" href="#module-data_manager.IndustryDataManager" title="永久链接至标题">¶</a></h2>
+<dl class="py class">
+<dt id="data_manager.IndustryDataManager.IndustryDataManager">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">data_manager.IndustryDataManager.</span></code><code class="sig-name descname"><span class="pre">IndustryDataManager</span></code><a class="headerlink" href="#data_manager.IndustryDataManager.IndustryDataManager" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>行业数据管理器</p>
+<dl class="py method">
+<dt id="data_manager.IndustryDataManager.IndustryDataManager.get_all_industry_list">
+<code class="sig-name descname"><span class="pre">get_all_industry_list</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#data_manager.IndustryDataManager.IndustryDataManager.get_all_industry_list" title="永久链接至目标">¶</a></dt>
+<dd><p>获取所有的行业列表</p>
+<dl class="field-list simple">
+<dt class="field-odd">返回</dt>
+<dd class="field-odd"><p><strong>industry_dict</strong> – 行业列表,key为group,value为该group下的行业分类的name名称</p>
+</dd>
+<dt class="field-even">返回类型</dt>
+<dd class="field-even"><p>Dict[str, List[str]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="data_manager.IndustryDataManager.IndustryDataManager.get_all_industry_symbol_maps">
+<code class="sig-name descname"><span class="pre">get_all_industry_symbol_maps</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#data_manager.IndustryDataManager.IndustryDataManager.get_all_industry_symbol_maps" title="永久链接至目标">¶</a></dt>
+<dd><p>获取所有行业品种映射表</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="data_manager.IndustryDataManager.IndustryDataManager.get_industry_symbol_map">
+<code class="sig-name descname"><span class="pre">get_industry_symbol_map</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#data_manager.IndustryDataManager.IndustryDataManager.get_industry_symbol_map" title="永久链接至目标">¶</a></dt>
+<dd><p>获取行业品种映射表</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>group</strong> (<em>str</em>) – 行业表组</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – 行业分组名</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p><strong>industry_symbol_map</strong> – 行业品种映射表</p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>Dict[str, List[str]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="data_manager.IndustryDataManager.IndustryDataManager.set_industry_symbol_map">
+<code class="sig-name descname"><span class="pre">set_industry_symbol_map</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">industry_symbol_map</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#data_manager.IndustryDataManager.IndustryDataManager.set_industry_symbol_map" title="永久链接至目标">¶</a></dt>
+<dd><p>设置行业</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>group</strong> (<em>str</em>) – 行业表组</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – 行业分组名</p></li>
+<li><p><strong>industry_symbol_map</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>List</em><em>[</em><em>str</em><em>]</em><em>]</em>) – 行业品种对应表</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-data_manager.TradeHoldDataManager">
+<span id="data-manager-tradeholddatamanager-module"></span><h2>data_manager.TradeHoldDataManager module<a class="headerlink" href="#module-data_manager.TradeHoldDataManager" title="永久链接至标题">¶</a></h2>
+<dl class="py class">
+<dt id="data_manager.TradeHoldDataManager.TradeHoldDataManager">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">data_manager.TradeHoldDataManager.</span></code><code class="sig-name descname"><span class="pre">TradeHoldDataManager</span></code><a class="headerlink" href="#data_manager.TradeHoldDataManager.TradeHoldDataManager" title="永久链接至目标">¶</a></dt>
+<dd><p>基类：<code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt id="data_manager.TradeHoldDataManager.TradeHoldDataManager.get_trade_hold_data_by_rank">
+<code class="sig-name descname"><span class="pre">get_trade_hold_data_by_rank</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rank_by</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'volume'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_by_symbol</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="headerlink" href="#data_manager.TradeHoldDataManager.TradeHoldDataManager.get_trade_hold_data_by_rank" title="永久链接至目标">¶</a></dt>
+<dd><p>根据排名标准获取成交持仓数据</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rank_by</strong> (<em>str</em><em>, </em><em>default volume</em>) – 排名标准, volume, long,short</p></li>
+<li><p><strong>group_by_symbol</strong> (<em>bool</em><em>, </em><em>default True</em>) – 是否根据品种聚合</p></li>
+</ul>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p><strong>data</strong></p>
+</dd>
+<dt class="field-odd">返回类型</dt>
+<dd class="field-odd"><p>成交持仓数据</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-data_manager">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-data_manager" title="永久链接至标题">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Commodity Futures Factor Backtesting Framework</a></h1>
+
+
+
+
+
+
+
+
+<h3>导航</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">快速搜索</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="转向" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Luo Feng.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/data_manager.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
