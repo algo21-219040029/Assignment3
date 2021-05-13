@@ -34,7 +34,18 @@ Besides visiting the following website directly, you can also refer to the **tut
 The following is the API reference documentation. You can refer to it:\
 **/docs/build/html/index.rst**,\
 in which you can see:
-![image.png](image.png)
+![image.png](/image/image.png)
+
+
+
+# Data
+
+The Data can be grasped from the following url:
+
+链接：https://pan.baidu.com/s/1z8RBAI8E7gB9tuLKsYGCyw 
+提取码：l7fz 
+
+After downloading the data, you need to put the data folder in the root path.
 
 
 
