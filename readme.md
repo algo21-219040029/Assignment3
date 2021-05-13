@@ -231,7 +231,7 @@ self.output_backtest_result()
     
 
 
-### 初始化因子测试模块
+### ### Initialize Factor Test Module
 
 
 ```python
@@ -239,7 +239,7 @@ factor_test = BaseFactorTest()
 factor_test.set_factor(group='TradeHoldFactor', name='BilateralTradeHoldFactor1',N=20,window=1)
 ```
 
-### 因子rank vs 收益率rank
+### Factor rank vs Return rank
 
 
 ```python
@@ -371,7 +371,7 @@ factor_test.get_Frank_vs_Rrank(group_num=5, period=20, industry='黑色')
     
 
 
-### 因子值正负及上穿下穿
+### Factor Sign and Cross with zero
 
 
 ```python
@@ -421,7 +421,7 @@ group_test.set_commodity_pool(group='DynamicPool', name='DynamicPool3')
 group_test.set_signal(group='GroupSignal', name='GroupLongSignal1')
 ```
 
-### 品种分组分布
+### Factor Group Distribution
 
 
 ```python
@@ -469,7 +469,7 @@ group_test.get_group_distribution_per_symbol(period=1, shift=0)
     
 
 
-### 品种分组状态变化
+### Symbol Group Changes
 
 
 ```python
@@ -489,7 +489,7 @@ group_test.get_groupby_pool_in_out(figsize=(30,30), annot_fontsize2=18, heatmap_
 
 ## BilateralTradeHoldFactor1, N=20, window=10
 
-### 初始化因子测试模块
+### Initialize Factor Test Module
 
 
 ```python
@@ -497,7 +497,7 @@ factor_test = BaseFactorTest()
 factor_test.set_factor(group='TradeHoldFactor', name='BilateralTradeHoldFactor1',N=20,window=10)
 ```
 
-### 因子rank vs 收益率rank
+### Factor rank vs Return rank
 
 
 ```python
@@ -559,7 +559,7 @@ factor_test.get_Frank_vs_Rrank(group_num=10, period=60)
     
 
 
-### 品种因子值分布
+### Factor Distribution per Symbol
 
 
 ```python
