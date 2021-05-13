@@ -37,6 +37,571 @@ in which you can see:
 ![image.png](image.png)
 
 
-```python
 
+# Example
+
+## Import packages
+
+
+```python
+import os
+from pathlib import Path
+os.chdir(Path(os.getcwd()).parent.parent)
+os.getcwd()
 ```
+
+
+
+
+    'D:\\LFProjects\\NewPythonProject'
+
+
+
+
+```python
+from factor_test.base import BaseFactorTest
+from backtesting.group_backtesting import GroupBacktesting
+from backtesting.period_backtesting import LongShortPeriodBacktesting
+```
+
+## Factor Test
+
+### BilateralTradeHoldFactor1, N=20, window=1
+
+####  H=1, q=0.6, CrossSection
+
+
+```python
+self = LongShortPeriodBacktesting(rate=0.0000, period=1, price='open')
+self.set_factor(group='TradeHoldFactor', name='BilateralTradeHoldFactor1', N=20, window=1)
+self.set_commodity_pool(group='DynamicPool', name='DynamicPool3')
+self.set_signal(group='CrossSectionSignal', name='CrossSectionSignal1', quantile=0.6)
+self.set_weight(group='EqualWeight', name='NoRiskNeutralEqualWeight')
+self.run_backtesting()
+```
+
+    100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2830/2830 [00:10<00:00, 266.22it/s]
+
+
+
+```python
+self.output_backtest_result()
+```
+
+
+![png](/image/output_8_0.png)
+​    
+
+
+
+
+![png](/image/output_8_1.png)
+    
+
+
+
+
+![png](/image/output_8_2.png)
+    
+
+
+
+
+![png](/image/output_8_3.png)
+    
+
+
+
+
+![png](/image/output_8_4.png)
+    
+
+
+
+
+![png](/image/output_8_5.png)
+    
+
+
+
+
+![png](/image/output_8_6.png)
+    
+
+
+
+
+![png](/image/output_8_7.png)
+    
+
+
+
+
+![png](/image/output_8_8.png)
+    
+
+
+
+
+![png](/image/output_8_9.png)
+    
+
+
+
+
+![png](/image/output_8_10.png)
+    
+
+
+
+
+![png](/image/output_8_11.png)
+    
+
+
+
+
+![png](/image/output_8_12.png)
+    
+
+
+
+
+![png](/image/output_8_13.png)
+    
+
+
+
+
+![png](/image/output_8_14.png)
+    
+
+
+
+
+![png](/image/output_8_15.png)
+    
+
+
+
+
+![png](/image/output_8_16.png)
+    
+
+
+
+
+![png](/image/output_8_17.png)
+    
+
+
+
+
+![png](/image/output_8_18.png)
+
+
+
+
+
+![png](/image/output_8_19.png)
+    
+
+
+
+
+![png](/image/output_8_20.png)
+    
+
+
+
+
+![png](/image/output_8_21.png)
+    
+
+
+
+
+![png](/image/output_8_22.png)
+    
+
+
+
+
+![png](/image/output_8_23.png)
+    
+
+
+### 初始化因子测试模块
+
+
+```python
+factor_test = BaseFactorTest()
+factor_test.set_factor(group='TradeHoldFactor', name='BilateralTradeHoldFactor1',N=20,window=1)
+```
+
+### 因子rank vs 收益率rank
+
+
+```python
+factor_test.get_Frank_vs_Rrank(group_num=10, period=1)
+```
+
+
+![png](/image/output_15_0.png)
+    
+
+
+
+```python
+factor_test.get_Frank_vs_Rrank(group_num=10, period=5)
+```
+
+
+![png](/image/output_16_0.png)
+    
+
+
+
+```python
+factor_test.get_Frank_vs_Rrank(group_num=10, period=10)
+```
+
+
+![png](/image/output_17_0.png)
+    
+
+
+
+```python
+factor_test.get_Frank_vs_Rrank(group_num=10, period=20)
+```
+
+
+![png](/image/output_18_0.png)
+    
+
+
+
+```python
+factor_test.get_Frank_vs_Rrank(group_num=5, period=1, industry='化工能源')
+```
+
+
+![png](/image/output_19_0.png)
+    
+
+
+
+```python
+factor_test.get_Frank_vs_Rrank(group_num=5, period=1, industry='有色_贵金属')
+```
+
+
+![png](/image/output_20_0.png)
+    
+
+
+
+```python
+factor_test.get_Frank_vs_Rrank(group_num=5, period=1, industry='农产品_软商品')
+```
+
+
+![png](/image/output_21_0.png)
+    
+
+
+
+```python
+factor_test.get_Frank_vs_Rrank(group_num=5, period=1, industry='油脂油料')
+```
+
+
+![png](/image/output_22_0.png)
+    
+
+
+
+```python
+factor_test.get_Frank_vs_Rrank(group_num=5, period=5, industry='油脂油料')
+```
+
+
+![png](/image/output_23_0.png)
+    
+
+
+
+```python
+factor_test.get_Frank_vs_Rrank(group_num=5, period=10, industry='油脂油料')
+```
+
+
+![png](/image/output_24_0.png)
+    
+
+
+
+```python
+factor_test.get_Frank_vs_Rrank(group_num=5, period=20, industry='油脂油料')
+```
+
+
+![png](/image/output_25_0.png)
+    
+
+
+
+```python
+factor_test.get_Frank_vs_Rrank(group_num=5, period=1, industry='黑色')
+```
+
+
+![png](/image/output_26_0.png)
+    
+
+
+
+```python
+factor_test.get_Frank_vs_Rrank(group_num=5, period=20, industry='黑色')
+```
+
+
+![png](/image/output_27_0.png)
+    
+
+
+### 因子值正负及上穿下穿
+
+
+```python
+self.get_factor_PN_stats()
+```
+
+
+![png](/image/output_31_0.png)
+    
+
+
+
+
+![png](/image/output_31_1.png)
+    
+
+
+
+
+![png](/image/output_31_2.png)
+    
+
+
+
+
+![png](/image/output_31_3.png)
+    
+
+
+
+
+![png](/image/output_31_4.png)
+    
+
+
+
+
+![png](/image/output_31_5.png)
+    
+
+
+
+```python
+group_test = GroupBacktesting(group_num=10, period=1)
+group_test.set_factor(group='TradeHoldFactor', name='BilateralTradeHoldFactor1', N=20, window=1)
+group_test.set_commodity_pool(group='DynamicPool', name='DynamicPool3')
+group_test.set_signal(group='GroupSignal', name='GroupLongSignal1')
+```
+
+### 品种分组分布
+
+
+```python
+group_test.get_group_distribution_per_symbol(period=1, shift=0)
+```
+
+
+![png](/image/output_34_0.png)
+    
+
+
+
+
+![png](/image/output_34_1.png)
+    
+
+
+
+
+![png](/image/output_34_2.png)
+    
+
+
+
+
+![png](/image/output_34_3.png)
+    
+
+
+
+
+![png](/image/output_34_4.png)
+    
+
+
+
+
+![png](/image/output_34_5.png)
+    
+
+
+
+
+![png](/image/output_34_6.png)
+    
+
+
+### 品种分组状态变化
+
+
+```python
+group_test.get_groupby_pool_in_out(figsize=(30,30), annot_fontsize2=18, heatmap_rotation2=True)
+```
+
+
+![png](/image/output_36_0.png)
+    
+
+
+
+
+![png](/image/output_36_1.png)
+    
+
+
+## BilateralTradeHoldFactor1, N=20, window=10
+
+### 初始化因子测试模块
+
+
+```python
+factor_test = BaseFactorTest()
+factor_test.set_factor(group='TradeHoldFactor', name='BilateralTradeHoldFactor1',N=20,window=10)
+```
+
+### 因子rank vs 收益率rank
+
+
+```python
+factor_test.get_Frank_vs_Rrank(group_num=10, period=1)
+```
+
+
+![png](/image/output_41_0.png)
+    
+
+
+
+```python
+factor_test.get_Frank_vs_Rrank(group_num=10, period=5)
+```
+
+
+![png](/image/output_42_0.png)
+    
+
+
+
+```python
+factor_test.get_Frank_vs_Rrank(group_num=10, period=10)
+```
+
+
+![png](/image/output_43_0.png)
+    
+
+
+
+```python
+factor_test.get_Frank_vs_Rrank(group_num=10, period=20)
+```
+
+
+![png](/image/output_44_0.png)
+    
+
+
+
+```python
+factor_test.get_Frank_vs_Rrank(group_num=10, period=40)
+```
+
+
+![png](/image/output_45_0.png)
+    
+
+
+
+```python
+factor_test.get_Frank_vs_Rrank(group_num=10, period=60)
+```
+
+
+![png](/image/output_46_0.png)
+    
+
+
+### 品种因子值分布
+
+
+```python
+factor_test.get_factor_distribution_per_symbol()
+```
+
+
+![png](/image/output_48_0.png)
+    
+
+
+
+
+![png](/image/output_48_1.png)
+    
+
+
+
+
+![png](/image/output_48_2.png)
+    
+
+
+
+
+![png](/image/output_48_3.png)
+    
+
+
+
+
+![png](/image/output_48_4.png)
+    
+
+
+
+
+![png](/image/output_48_5.png)
+    
+
+
+
+
+![png](/image/output_48_6.png)
+    
